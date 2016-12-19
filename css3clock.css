@@ -3,7 +3,7 @@ body {
     margin: 0px;
 }
 
-.lightswitch {
+#lightswitch {
     display: none;
 }
 
