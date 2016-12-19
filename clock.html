@@ -1,70 +1,82 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>A Stolen Clock</title>
-<link rel="stylesheet" type="text/css" href="css3clock.css" />
+    <link rel="stylesheet" type="text/css" href="css3clock.css" />
 </head>
 
 <body>
-    
-<div class="square">
-    
-<div id="liveclock" class="outer_face">
 
-	<div class="marker oneseven"></div>
-	<div class="marker twoeight"></div>
-	<div class="marker fourten"></div>
-	<div class="marker fiveeleven"></div>
+    <input type="checkbox" id="lightswitch" />
 
-	<a href="http://htmlpreview.github.io/?https://github.com/maxint137/stolenClock/blob/master/clock.html"><div class="inner_face">
-		<div class="hand hour"></div>
-		<div class="hand minute"></div>
-		<div class="hand second"></div></a>
-	</div>
-</div>
+    <div class="square">
 
-    
+        <div id="liveclock" class="outer_face bgNight">
 
-</div>
-    
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript">
+            <div class="marker oneseven bgNight"></div>
+            <div class="marker twoeight"></div>
+            <div class="marker fourten"></div>
+            <div class="marker fiveeleven"></div>
 
-/***********************************************
-* CSS3 Analog Clock- by JavaScript Kit (www.javascriptkit.com)
-* Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and 100s more
-***********************************************/
-
-var $hands = $('#liveclock div.hand')
-
-window.requestAnimationFrame = window.requestAnimationFrame
-                               || window.mozRequestAnimationFrame
-                               || window.webkitRequestAnimationFrame
-                               || window.msRequestAnimationFrame
-                               || function(f){setTimeout(f, 60)}
+            <a href="http://htmlpreview.github.io/?https://github.com/maxint137/stolenClock/blob/master/clock.html">
+                <div class="inner_face">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+            </a>
+            </div>
+        </div>
+    </div>
 
 
-function updateclock(){
-    //return;
-    
-	var curdate = new Date()
-    //curdate = new Date(1971, 1, 24, 15, 45, 0, 0);
-	
-    var hour_as_degree = ( curdate.getHours() + curdate.getMinutes()/60 ) / 12 * 360
-	var minute_as_degree = ( curdate.getMinutes() + curdate.getSeconds()/60 ) / 60 * 360
-	var second_as_degree = ( curdate.getSeconds() + curdate.getMilliseconds()/1000 ) /60 * 360
-        
-	$hands.filter('.hour').css({transform: 'rotate(' + hour_as_degree + 'deg)' })
-	$hands.filter('.minute').css({transform: 'rotate(' + minute_as_degree + 'deg)' })
-	$hands.filter('.second').css({transform: 'rotate(' + second_as_degree + 'deg)' })
-    
-	requestAnimationFrame(updateclock)
-}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-requestAnimationFrame(updateclock)
+    <script src="http://suncalc.net/scripts/suncalc.js"></script>
+
+    <script type="text/javascript">
+        /***********************************************
+         * CSS3 Analog Clock- by JavaScript Kit (www.javascriptkit.com)
+         * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and 100s more
+         ***********************************************/
+
+        var $hands = $('#liveclock div.hand')
+
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (f) {
+            setTimeout(f, 60)
+        }
 
 
-</script>
+        function updateclock() {
+
+            var curdate = new Date()
+
+            var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360
+            var minute_as_degree = (curdate.getMinutes() + curdate.getSeconds() / 60) / 60 * 360
+            var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360
+
+            $hands.filter('.hour').css({
+                transform: 'rotate(' + hour_as_degree + 'deg)'
+            })
+            $hands.filter('.minute').css({
+                transform: 'rotate(' + minute_as_degree + 'deg)'
+            })
+            $hands.filter('.second').css({
+                transform: 'rotate(' + second_as_degree + 'deg)'
+            })
+
+            if (0 == curdate.getSeconds() % 5) {
+                var times = SunCalc.getDayInfo(new Date(), 35.7075239, 139.729803);
+                var lightsOn = times.sunrise.end < new Date() && new Date() < times.sunset.end;
+                $("#lightswitch").prop("checked", !lightsOn);
+            }
+
+            requestAnimationFrame(updateclock)
+        }
+
+        requestAnimationFrame(updateclock)
+    </script>
 </body>
+
 </html>

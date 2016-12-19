@@ -46,6 +46,7 @@
 
 /* the minutes markers for 3,9 */
 .outer_face::after {
+    
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
@@ -185,3 +186,20 @@
     top: 0;
     background: red;
 }
+
+
+input#lightswitch:checked ~ .square,
+input#lightswitch:checked ~ .square .outer_face,
+input#lightswitch:checked ~ .square .inner_face {
+  background-color: black;
+}
+
+input#lightswitch:checked ~ .square .outer_face::before,
+input#lightswitch:checked ~ .square .outer_face::after,
+input#lightswitch:checked ~ .square .inner_face::before,
+input#lightswitch:checked ~ .square .hand.minute,
+input#lightswitch:checked ~ .square .hand.hour {
+  background-color: white;
+}
+
+
