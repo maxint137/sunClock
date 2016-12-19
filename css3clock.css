@@ -1,13 +1,16 @@
 .outer_face {
     position: relative;
-    width: 200px; /* width of clock */
-    height: 200px; /* height of clock */
-    border-radius: 200px; /* clock round corner radius */
+    
+    width: 100%; /* width of clock */
+    height: 100%; /* height of clock */
+    border-radius: 100%; /* clock round corner radius */
+    
     background: white;
     box-shadow: inset 0 0 10px gray;
     border: 0 solid gray; /* thickness of outer border */
     }
 
+/* the minutes markers for 12,6 */
 .outer_face::before, .outer_face::after, .outer_face .marker { /* time markers syle */
     content: "";
     position: absolute;
@@ -20,13 +23,16 @@
     top: 0
     }
 
+/* the minutes markers for 3,9 - just rotate by 90deg*/
 .outer_face::after {
+
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg)
     }
 
+/* the minutes markers, except for 12,3,6,9 */
 .outer_face .marker {
     background: gray;
     width: 6px; /* width of all other markers */
@@ -74,23 +80,24 @@
     top: 6% /* set this value of 1/2 height value*/
     }
 
+/* the central part - the glow and the circle */
 .inner_face::before {
     /* clock center circle small */
     content: "";
-    width: 18px; /* width of inner circle */
-    height: 18px; /* height of inner circle */
-    border-radius: 18px;
-    margin-left: -9px; /* set this value of 1/2 width value*/
-    margin-top: -9px; /* set this value of 1/2 height value*/
+    width: 8%; /* width of inner circle */
+    height: 8%; /* height of inner circle */
+    border-radius: 100%;
+    margin-left: -4%; /* set this value of 1/2 width value*/
+    margin-top: -4%; /* set this value of 1/2 height value*/
     background: black;
     position: absolute;
     top: 50%;
     left: 50%;
-    box-shadow: 0 0 30px blue;
+    box-shadow: 0 0 30px red;
     }
 
 .inner_face::after {
-    content: "QUARTZ";
+    content: "山吹町";
     position: absolute;
     width: 100%;
     font: normal 0.8em Arial;
@@ -101,11 +108,11 @@
 
 .hand, .hand.hour {
     position: absolute;
-    width: 4px; /* width of hour hand */
+    width: 3%; /* width of hour hand */
     height: 30%; /* height of hour hand */
     top: 20%; /* set top to 50% - height */
     left: 50%;
-    margin-left: -2px; /* set this value to 1/2 width */
+    margin-left: -1.5%; /* set this value to 1/2 width */
     background: black;
     -moz-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
@@ -124,14 +131,14 @@
 .hand.minute {
     height: 45%; /* height of min hand */
     top: 5%; /* set top to 50% - height */
-    width: 5px; /* width of min hand */
-    margin-left: -2.5px; /* set this value to 1/2 width */
+    width: 2%; /* width of min hand */
+    margin-left: -1%; /* set this value to 1/2 width */
     }
 
 .hand.second {
     height: 50%; /* height of sec hand */
-    width: 2px; /* width of sec hand */
-    margin-left: -1px; /* set this value to 1/2 width */
+    width: 1%; /* width of sec hand */
+    margin-left: -0.5%; /* set this value to 1/2 width */
     top: 0;
     background: red
     }
