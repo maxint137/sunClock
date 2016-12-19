@@ -97,7 +97,7 @@
     background: white;
     -moz-border-radius: 1000px;
     -webkit-border-radius: 1000px;
-    border-radius1: 1000px;
+    border-radius: 1000px;
     z-index: 1000;
     left: 6%;
     /* set this value of 1/2 width value*/
