@@ -1,0 +1,23 @@
+{
+  "name": "stolenClock",
+  "version": "0.1.0",
+  "description": "Just a clock to run on your (otherwise useless) Surface RT.",
+  "homepage": "https://github.com/maxint137/stolenClock",
+  "keywords": [
+    "clock",
+    "SurfaceRT"
+  ],
+  "author": "Max Levy",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maxint137/stolenClock.git"
+  },
+  "dependencies": {
+    "d3": "^4.4.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.0",
+    "gulp-sass": "^3.1.0",
+    "suncalc": "^1.8.0",
+    "underscore": "^1.8.3"
+  }
+}
