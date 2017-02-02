@@ -9,14 +9,12 @@ body {
     background: -webkit-radial-gradient($gradient);
     background: -moz-radial-gradient($gradient);
     background: -ms-radial-gradient($gradient);
-    background: radial-gradient($gradient);
 }
 
 @mixin background-linear-gradient($gradient) {
     background: -webkit-linear-gradient($gradient);
     background: -moz-linear-gradient($gradient);
     background: -ms-linear-gradient($gradient);
-    background: linear-gradient($gradient);
 }
 
 @mixin background-image-repeating-linear-gradient($gradient) {

@@ -13,7 +13,6 @@ body {
   background: -webkit-radial-gradient(bottom, circle, #f2f8f7 0%, #f9f91c 3%, #f7d62e 8%, #f8c85f 12%, #c9a584 30%, #738285 51%, #2e617a 85%, #184b6a 100%);
   background: -moz-radial-gradient(bottom, circle, #f2f8f7 0%, #f9f91c 3%, #f7d62e 8%, #f8c85f 12%, #c9a584 30%, #738285 51%, #2e617a 85%, #184b6a 100%);
   background: -ms-radial-gradient(bottom, circle, #f2f8f7 0%, #f9f91c 3%, #f7d62e 8%, #f8c85f 12%, #c9a584 30%, #738285 51%, #2e617a 85%, #184b6a 100%);
-  background: radial-gradient(bottom, circle, #f2f8f7 0%, #f9f91c 3%, #f7d62e 8%, #f8c85f 12%, #c9a584 30%, #738285 51%, #2e617a 85%, #184b6a 100%);
   z-index: 10;
   opacity: 0.5; }
 
@@ -27,7 +26,6 @@ body {
   background: -webkit-radial-gradient(bottom, circle, rgba(252, 255, 251, 0.9) 0%, rgba(253, 250, 219, 0.4) 30%, rgba(226, 219, 197, 0.01) 70%, rgba(226, 219, 197, 0) 70%, rgba(201, 165, 132, 0) 100%);
   background: -moz-radial-gradient(bottom, circle, rgba(252, 255, 251, 0.9) 0%, rgba(253, 250, 219, 0.4) 30%, rgba(226, 219, 197, 0.01) 70%, rgba(226, 219, 197, 0) 70%, rgba(201, 165, 132, 0) 100%);
   background: -ms-radial-gradient(bottom, circle, rgba(252, 255, 251, 0.9) 0%, rgba(253, 250, 219, 0.4) 30%, rgba(226, 219, 197, 0.01) 70%, rgba(226, 219, 197, 0) 70%, rgba(201, 165, 132, 0) 100%);
-  background: radial-gradient(bottom, circle, rgba(252, 255, 251, 0.9) 0%, rgba(253, 250, 219, 0.4) 30%, rgba(226, 219, 197, 0.01) 70%, rgba(226, 219, 197, 0) 70%, rgba(201, 165, 132, 0) 100%);
   z-index: 999;
   opacity: 0.5; }
 
@@ -41,7 +39,6 @@ body {
   background: -webkit-radial-gradient(40% 55%, circle, #08314e 1%, #081a38 10%, #04102e 40%, #02080d 70%);
   background: -moz-radial-gradient(40% 55%, circle, #08314e 1%, #081a38 10%, #04102e 40%, #02080d 70%);
   background: -ms-radial-gradient(40% 55%, circle, #08314e 1%, #081a38 10%, #04102e 40%, #02080d 70%);
-  background: radial-gradient(40% 55%, circle, #08314e 1%, #081a38 10%, #04102e 40%, #02080d 70%);
   z-index: 10001;
   opacity: 0; }
 
@@ -55,7 +52,6 @@ body {
   background: -webkit-radial-gradient(bottom, circle, rgba(254, 255, 255, 0.8) 5%, #ecff00 10%, #fd3229 25%, #f30000 40%, #5d0000 100%);
   background: -moz-radial-gradient(bottom, circle, rgba(254, 255, 255, 0.8) 5%, #ecff00 10%, #fd3229 25%, #f30000 40%, #5d0000 100%);
   background: -ms-radial-gradient(bottom, circle, rgba(254, 255, 255, 0.8) 5%, #ecff00 10%, #fd3229 25%, #f30000 40%, #5d0000 100%);
-  background: radial-gradient(bottom, circle, rgba(254, 255, 255, 0.8) 5%, #ecff00 10%, #fd3229 25%, #f30000 40%, #5d0000 100%);
   z-index: 999;
   opacity: 0.3; }
 
@@ -70,7 +66,6 @@ body {
   background: -webkit-linear-gradient(bottom, #f9fbf0 10%, #d7fdfe 20%, #a7defd 40%, #6eafff 100%);
   background: -moz-linear-gradient(bottom, #f9fbf0 10%, #d7fdfe 20%, #a7defd 40%, #6eafff 100%);
   background: -ms-linear-gradient(bottom, #f9fbf0 10%, #d7fdfe 20%, #a7defd 40%, #6eafff 100%);
-  background: linear-gradient(bottom, #f9fbf0 10%, #d7fdfe 20%, #a7defd 40%, #6eafff 100%);
   opacity: 0.52; }
 
 #starsContainer {
@@ -102,7 +97,6 @@ body {
   background: -webkit-linear-gradient(bottom, rgba(212, 87, 43, 0.9) 0%, rgba(246, 149, 52, 0.8) 20%, rgba(24, 75, 106, 0) 100%);
   background: -moz-linear-gradient(bottom, rgba(212, 87, 43, 0.9) 0%, rgba(246, 149, 52, 0.8) 20%, rgba(24, 75, 106, 0) 100%);
   background: -ms-linear-gradient(bottom, rgba(212, 87, 43, 0.9) 0%, rgba(246, 149, 52, 0.8) 20%, rgba(24, 75, 106, 0) 100%);
-  background: linear-gradient(bottom, rgba(212, 87, 43, 0.9) 0%, rgba(246, 149, 52, 0.8) 20%, rgba(24, 75, 106, 0) 100%);
   opacity: 0.99; }
 
 #horizonNight {
@@ -117,7 +111,6 @@ body {
   background: -webkit-linear-gradient(bottom, #39a7ff 0%, #0d62f5 20%, rgba(0, 11, 22, 0.1) 60%);
   background: -moz-linear-gradient(bottom, #39a7ff 0%, #0d62f5 20%, rgba(0, 11, 22, 0.1) 60%);
   background: -ms-linear-gradient(bottom, #39a7ff 0%, #0d62f5 20%, rgba(0, 11, 22, 0.1) 60%);
-  background: linear-gradient(bottom, #39a7ff 0%, #0d62f5 20%, rgba(0, 11, 22, 0.1) 60%);
   opacity: 0; }
 
 #darknessOverlaySky {
@@ -151,7 +144,6 @@ body {
   background: -webkit-linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.2) 44%, rgba(0, 0, 0, 0.65) 95%, rgba(0, 0, 0, 0.62) 100%);
   background: -moz-linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.2) 44%, rgba(0, 0, 0, 0.65) 95%, rgba(0, 0, 0, 0.62) 100%);
   background: -ms-linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.2) 44%, rgba(0, 0, 0, 0.65) 95%, rgba(0, 0, 0, 0.62) 100%);
-  background: linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.2) 44%, rgba(0, 0, 0, 0.65) 95%, rgba(0, 0, 0, 0.62) 100%);
   z-index: 20; }
 
 #water {
@@ -165,7 +157,6 @@ body {
   background: -webkit-linear-gradient(bottom, #00192d 0%, #0e4775 35%, #1a7eae 70%, #3ea8dc 100%);
   background: -moz-linear-gradient(bottom, #00192d 0%, #0e4775 35%, #1a7eae 70%, #3ea8dc 100%);
   background: -ms-linear-gradient(bottom, #00192d 0%, #0e4775 35%, #1a7eae 70%, #3ea8dc 100%);
-  background: linear-gradient(bottom, #00192d 0%, #0e4775 35%, #1a7eae 70%, #3ea8dc 100%);
   z-index: 10; }
 
 #waterReflectionContainer {
@@ -191,7 +182,6 @@ body {
   background: -webkit-radial-gradient(50% 0px, #f7b148 3%, #f8af41 6%, rgba(207, 62, 30, 0.4) 35%, rgba(176, 91, 48, 0.1) 45%, rgba(141, 88, 47, 0) 60%, rgba(116, 82, 63, 0) 70%, rgba(44, 65, 68, 0) 80%, rgba(7, 19, 31, 0) 100%);
   background: -moz-radial-gradient(50% 0px, #f7b148 3%, #f8af41 6%, rgba(207, 62, 30, 0.4) 35%, rgba(176, 91, 48, 0.1) 45%, rgba(141, 88, 47, 0) 60%, rgba(116, 82, 63, 0) 70%, rgba(44, 65, 68, 0) 80%, rgba(7, 19, 31, 0) 100%);
   background: -ms-radial-gradient(50% 0px, #f7b148 3%, #f8af41 6%, rgba(207, 62, 30, 0.4) 35%, rgba(176, 91, 48, 0.1) 45%, rgba(141, 88, 47, 0) 60%, rgba(116, 82, 63, 0) 70%, rgba(44, 65, 68, 0) 80%, rgba(7, 19, 31, 0) 100%);
-  background: radial-gradient(50% 0px, #f7b148 3%, #f8af41 6%, rgba(207, 62, 30, 0.4) 35%, rgba(176, 91, 48, 0.1) 45%, rgba(141, 88, 47, 0) 60%, rgba(116, 82, 63, 0) 70%, rgba(44, 65, 68, 0) 80%, rgba(7, 19, 31, 0) 100%);
   z-index: 999;
   opacity: 0.7;
   -webkit-transform: rotateX(45deg);
@@ -209,7 +199,6 @@ body {
   background: -webkit-linear-gradient(left, rgba(69, 70, 61, 0) 3%, rgba(216, 100, 38, 0.1) 32%, rgba(252, 176, 48, 0.35) 35%, #fdd74f 45%, #fdfee1 48%, #fdfee1 52%, #18c2d6 55%, rgba(34, 204, 234, 0.1) 65%, rgba(34, 204, 234, 0.1) 60%, rgba(34, 204, 234, 0) 97%);
   background: -moz-linear-gradient(left, rgba(69, 70, 61, 0) 3%, rgba(216, 100, 38, 0.1) 32%, rgba(252, 176, 48, 0.35) 35%, #fdd74f 45%, #fdfee1 48%, #fdfee1 52%, #18c2d6 55%, rgba(34, 204, 234, 0.1) 65%, rgba(34, 204, 234, 0.1) 60%, rgba(34, 204, 234, 0) 97%);
   background: -ms-linear-gradient(left, rgba(69, 70, 61, 0) 3%, rgba(216, 100, 38, 0.1) 32%, rgba(252, 176, 48, 0.35) 35%, #fdd74f 45%, #fdfee1 48%, #fdfee1 52%, #18c2d6 55%, rgba(34, 204, 234, 0.1) 65%, rgba(34, 204, 234, 0.1) 60%, rgba(34, 204, 234, 0) 97%);
-  background: linear-gradient(left, rgba(69, 70, 61, 0) 3%, rgba(216, 100, 38, 0.1) 32%, rgba(252, 176, 48, 0.35) 35%, #fdd74f 45%, #fdfee1 48%, #fdfee1 52%, #18c2d6 55%, rgba(34, 204, 234, 0.1) 65%, rgba(34, 204, 234, 0.1) 60%, rgba(34, 204, 234, 0) 97%);
   z-index: 999;
   -webkit-transform: rotateX(45deg);
   -moz-transform: rotateX(45deg);
