@@ -39,9 +39,9 @@ body {
     width: 100%;
     height: 50%;
     background-repeat: no-repeat;
-    background: -webkit-radial-gradient(40% 55%, circle, rgba(249, 249, 250, 1) -1%, rgba(189, 255, 254, 1) 1%, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
-    background: -moz-radial-gradient(40% 55%, circle, rgba(249, 249, 250, 1) -1%, rgba(189, 255, 254, 1) 1%, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
-    background: -ms-radial-gradient(40% 55%, circle, rgba(249, 249, 250, 1) -1%, rgba(189, 255, 254, 1) 1%, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
+    background: -webkit-radial-gradient(40% 55%, circle, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
+    background: -moz-radial-gradient(40% 55%, circle, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
+    background: -ms-radial-gradient(40% 55%, circle, rgba(8, 49, 78, 1) 1%, rgba(8, 26, 56, 1) 10%, rgba(4, 16, 46, 1) 40%, rgba(2, 8, 13, 1) 70%);
     z-index: 10001;
     opacity: 0;
 }

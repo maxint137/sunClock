@@ -42,7 +42,9 @@ document.addEventListener('mousemove', function(e) {
 
     document.getElementById("darknessOverlay").style.opacity = Math.min((mouse.y - (myHeight / 2)) / (myHeight / 2), 1);
     document.getElementById("darknessOverlaySky").style.opacity = Math.min((mouse.y - (myHeight * 7 / 10)) / (myHeight - (myHeight * 7 / 10)), 1);
-    document.getElementById("moon").style.opacity = Math.min((mouse.y - (myHeight * 9 / 10)) / (myHeight - (myHeight * 9 / 10)), 0.65);
+
+    var nightSkyDarkness = 0.65;
+    document.getElementById("moon").style.opacity = Math.min((mouse.y - (myHeight * 9 / 10)) / (myHeight - (myHeight * 9 / 10)), nightSkyDarkness);
     document.getElementById("horizonNight").style.opacity = (mouse.y - (myHeight * 4 / 5)) / (myHeight - (myHeight * 4 / 5));
 
     document.getElementById("starsContainer").style.opacity = (mouse.y / myHeight - 0.6);
