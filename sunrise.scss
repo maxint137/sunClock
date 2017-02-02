@@ -40,31 +40,6 @@ rgba(201, 165, 132, 1) 30%,
 rgba(115, 130, 133, 1) 51%,
 rgba(46, 97, 122, 1) 85%,
 rgba(24, 75, 106, 1) 100%;
-$sunDayBackground: bottom,
-circle,
-rgba(252, 255, 251, 0.9) 0%,
-rgba(253, 250, 219, 0.4) 30%,
-rgba(226, 219, 197, 0.01) 70%,
-rgba(226, 219, 197, 0.0) 70%,
-rgba(201, 165, 132, 0) 100%;
-$moonBackground: 40% 55%,
-circle,
-rgba(8, 49, 78, 1) 1%,
-rgba(8, 26, 56, 1) 10%,
-rgba(4, 16, 46, 1) 40%,
-rgba(2, 8, 13, 1) 70%;
-$sunsetBackground: bottom,
-circle,
-rgba(254, 255, 255, 0.8) 5%,
-rgba(236, 255, 0, 1) 10%,
-rgba(253, 50, 41, 1) 25%,
-rgba(243, 0, 0, 1) 40%,
-rgba(93, 0, 0, 1) 100%;
-$skyBackground: bottom,
-rgba(249, 251, 240, 1) 10%,
-rgba(215, 253, 254, 1) 20%,
-rgba(167, 222, 253, 1) 40%,
-rgba(110, 175, 255, 1) 100%;
 #sun {
     position: absolute;
     top: 0px;
@@ -77,6 +52,13 @@ rgba(110, 175, 255, 1) 100%;
     opacity: 0.5;
 }
 
+$sunDayBackground: bottom,
+circle,
+rgba(252, 255, 251, 0.9) 0%,
+rgba(253, 250, 219, 0.4) 30%,
+rgba(226, 219, 197, 0.01) 70%,
+rgba(226, 219, 197, 0.0) 70%,
+rgba(201, 165, 132, 0) 100%;
 #sunDay {
     position: absolute;
     top: 0px;
@@ -89,6 +71,12 @@ rgba(110, 175, 255, 1) 100%;
     opacity: 0.5;
 }
 
+$moonBackground: 40% 55%,
+circle,
+rgba(8, 49, 78, 1) 1%,
+rgba(8, 26, 56, 1) 10%,
+rgba(4, 16, 46, 1) 40%,
+rgba(2, 8, 13, 1) 70%;
 #moon {
     position: absolute;
     top: 0px;
@@ -101,6 +89,13 @@ rgba(110, 175, 255, 1) 100%;
     opacity: 0;
 }
 
+$sunsetBackground: bottom,
+circle,
+rgba(254, 255, 255, 0.8) 5%,
+rgba(236, 255, 0, 1) 10%,
+rgba(253, 50, 41, 1) 25%,
+rgba(243, 0, 0, 1) 40%,
+rgba(93, 0, 0, 1) 100%;
 #sunSet {
     position: absolute;
     top: 0px;
@@ -113,6 +108,11 @@ rgba(110, 175, 255, 1) 100%;
     opacity: 0.3;
 }
 
+$skyBackground: bottom,
+rgba(249, 251, 240, 1) 10%,
+rgba(215, 253, 254, 1) 20%,
+rgba(167, 222, 253, 1) 40%,
+rgba(110, 175, 255, 1) 100%;
 #sky {
     cursor: pointer;
     position: absolute;
@@ -147,13 +147,15 @@ $horizonBackground:bottom,
 rgba(212, 87, 43, 0.9) 0%,
 rgba(246, 149, 52, 0.8) 20%,
 rgba(24, 75, 106, 0) 100%;
+// A layer above the horizon, actually
+$layersAboveHorizon: 50%; // 50%
 #horizon {
     cursor: pointer;
     position: absolute;
     top: 0px;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: $layersAboveHorizon;
     background-repeat: no-repeat;
     z-index: 5;
     @include background-linear-gradient($horizonBackground);
@@ -164,13 +166,14 @@ $horizonNightBackground: bottom,
 rgba(57, 167, 255, 1) 0%,
 rgba(13, 98, 245, 1) 20%,
 rgba(0, 11, 22, 0.1) 60%;
+// A layer above the horizon, another one
 #horizonNight {
     cursor: pointer;
     position: absolute;
     top: 0px;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: $layersAboveHorizon;
     background-repeat: no-repeat;
     z-index: 10000;
     @include background-linear-gradient($horizonNightBackground);
@@ -184,10 +187,11 @@ rgba(0, 11, 22, 0.1) 60%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: $layersAboveHorizon;
     z-index: 9999;
 }
 
+// the black ground
 #darknessOverlay {
     cursor: default;
     background-color: #000;
@@ -196,7 +200,7 @@ rgba(0, 11, 22, 0.1) 60%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: 100%-$layersAboveHorizon;
     z-index: 99;
 }
 
@@ -210,7 +214,7 @@ rgba(0, 0, 0, 0.62) 100%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: 100%-$layersAboveHorizon;
     background-repeat: no-repeat;
     @include background-linear-gradient($waterDistanceBackground);
     z-index: 20;
@@ -227,7 +231,7 @@ rgba(62, 168, 220, 1) 100%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: 100%-$layersAboveHorizon;
     background-repeat: no-repeat;
     @include background-linear-gradient($waterBackground);
     z-index: 10;
