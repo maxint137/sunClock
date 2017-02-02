@@ -61,11 +61,6 @@ document.addEventListener('mousemove', function(e) {
             clouds[i].style.left = Math.min(myWidth * (Math.pow(mouse.y, 2) / Math.pow(myHeight / 2, 2)) * -1, 0);
         }
 
-        var stars = document.getElementsByClassName('star');
-        for (var i = 0; i < stars.length; i++) {
-            stars[i].style.opacity = (mouse.y / myHeight - 0.6);
-        }
-
         if (mouse.y > myHeight / 2) {
             document.getElementById("sun").style.opacity = Math.min((myHeight - mouse.y) / (myHeight / 2) + 0.2, 0.5);
             document.getElementById("horizon").style.opacity = (myHeight - mouse.y) / (myHeight / 2) + 0.2;
