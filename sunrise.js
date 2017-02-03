@@ -54,19 +54,12 @@ document.addEventListener('mousemove', function(e) {
         sunDay.style.left = "0px";
     }
 
-    if (sun) {
-        var skyHeight = sun.clientHeight;
-        var skyRatio = mouse.y / skyHeight;
-    }
 
-    var water = document.getElementById("water");
-    if (water) {
-        var waterHeight = water.clientHeight;
-        var waterRatio = waterHeight / myHeight;
-    }
+    var skyProportion = 0.5;
+
 
     var darknessOverlay = document.getElementById("darknessOverlay");
-    darknessOverlay ? darknessOverlay.style.opacity = Math.min((mouse.y - (myHeight / 2)) / (myHeight / 2), 1) : null;
+    darknessOverlay ? darknessOverlay.style.opacity = Math.min((mouse.y - (myHeight * skyProportion)) / (myHeight * skyProportion), 1) : null;
 
     var darknessOverlaySky = document.getElementById("darknessOverlaySky");
     darknessOverlaySky ? darknessOverlaySky.style.opacity = Math.min((mouse.y - (myHeight * 7 / 10)) / (myHeight - (myHeight * 7 / 10)), 1) : null;
@@ -93,14 +86,14 @@ document.addEventListener('mousemove', function(e) {
 
     var horizon = document.getElementById("horizon");
 
-    if (mouse.y > myHeight / 2) {
-        !sun ? null : sun.style.opacity = Math.min((myHeight - mouse.y) / (myHeight / 2) + 0.2, 0.5);
-        !horizon ? null : horizon.style.opacity = (myHeight - mouse.y) / (myHeight / 2) + 0.2;
-        !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = (myHeight - mouse.y) / (myHeight / 2) - 0.1;
+    if (mouse.y > myHeight * skyProportion) {
+        !sun ? null : sun.style.opacity = Math.min((myHeight - mouse.y) / (myHeight * skyProportion) + 0.2, 0.5);
+        !horizon ? null : horizon.style.opacity = (myHeight - mouse.y) / (myHeight * skyProportion) + 0.2;
+        !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = (myHeight - mouse.y) / (myHeight * skyProportion) - 0.1;
     } else {
-        !sun ? null : sun.style.opacity = Math.min(mouse.y / (myHeight / 2), 0.5);
-        !horizon ? null : horizon.style.opacity = Math.min(mouse.y / (myHeight / 2), 0.99);
-        !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = mouse.y / (myHeight / 2) - 0.1;
+        !sun ? null : sun.style.opacity = Math.min(mouse.y / (myHeight * skyProportion), 0.5);
+        !horizon ? null : horizon.style.opacity = Math.min(mouse.y / (myHeight * skyProportion), 0.99);
+        !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = mouse.y / (myHeight * skyProportion) - 0.1;
     }
 }, false);
 
@@ -123,17 +116,4 @@ function updateDimensions() {
 
 function windowResize() {
     updateDimensions();
-
-    var horizon = document.getElementById("horizon");
-    var skyHeight = horizon ? horizon.clientHeight : null;
-
-    // update to new sky height
-    var sun = document.getElementById("sun");
-    skyHeight = sun ? sun.clientHeight : null;
-
-    var waterDistance = document.getElementById("waterDistance");
-    waterDistance ? waterDistance.style.height = myHeight - skyHeight : null;
-
-    var division = document.getElementById("division");
-    division ? division.style.top = skyHeight : null;
 }

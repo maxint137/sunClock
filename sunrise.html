@@ -6,53 +6,28 @@
 
 <body style="width: 100%; height: 100%; margin: 0; padding: 0" onresize="windowResize();">
 
-    <!--Sun layer has height of 50%, renders a YELLOW radial gradient at the center, with opacity of 0.5
-    Then when the mouse moves vertically upwards/downwards the opacity is linear reduced to 0/0.2 -->
     <div id="sun"></div>
-
-    <!--Similar to the sun - a GRAY radial gradient, with opacity changin from 1 (when the mouse is at the top) to 0-->
     <div id="sunDay"></div>
-
-    <!--SImilar - the REDDISH radial gradient, opaque when mouse it at the top, 0.3 when hitting the horizon, then growing to 1-->
     <div id="sunSet"></div>
-
-    <!--The BLUEISH linear gradient, opaque in the mid-day, 50% at the sunset, vanishes in the night-->
     <div id="sky"></div>
 
-    <!--A YELLOWISH linear gradient, opaque at the sunset, disappearing the mid-day/night-->
     <div id="horizon"></div>
 
-    <!--BLUE linear gradient, non-transparent only after ~10 in the night -->
     <div id="horizonNight"></div>
 
-    <!--STEEL-colored radial gradient, is not visible till ~11 in the night -->
     <div id="moon"></div>
-
-    <!--not really visible-->
-    <div id="division"></div>
-
-    <!--A static BLUE linear gradient-->
     <div id="water"></div>
 
-    <!--Something to do with the perspectiveOrigin, not sure how-->
-    <!--DARK-YELLOWISH radial gradient, only opaque around the sunset-->
     <div id="waterReflectionContainer">
         <div id="waterReflectionMiddle"></div>
     </div>
 
-    <!--GRAY liear gradient to make the water look darker at the horizon. Constant in the night, 60% opaque in the noon-->
     <div id="waterDistance"></div>
-
-    <!--BLACK non-gradient layer above the horizon, transparent till ~8 in the evening, opaque in the midnight -->
     <div id="darknessOverlaySky"></div>
-
-    <!--BLACK non-gradient layer below the horizon, transparent till sunset, opaque in the midnight -->
     <div id="darknessOverlay"></div>
+    <div id="oceanRipple">
 
-    <!--A static, slightly diagonal LIGHT-GRAY periodic lineral gradient -->
-    <div id="oceanRipple"></div>
-
-    <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
+        <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
 </body>
 
 </html>

@@ -2,9 +2,9 @@ $padding: 6px;
 body {
     cursor: pointer;
     overflow: hidden;
-    //background-color: black;
 }
 
+$skyHeight: 50%;
 @mixin background-radial-gradient($gradient) {
     background: -webkit-radial-gradient($gradient);
     background: -moz-radial-gradient($gradient);
@@ -28,7 +28,9 @@ body {
     transform: rotateX($angle);
 }
 
-$sunBackground: bottom,
+// Sun layer has height of 50%, renders a YELLOW radial gradient at the center, with opacity of 0.5
+// It's transparent in the noon, keeps 50% opaque during the day and evening, becomes almost transparent after 10
+$sun: bottom,
 circle,
 rgba(242, 248, 247, 1) 0%,
 rgba(249, 249, 28, 1) 3%,
@@ -43,14 +45,15 @@ rgba(24, 75, 106, 1) 100%;
     top: 0px;
     left: 0%;
     width: 100%;
-    height: 50%;
+    height: $skyHeight;
     background-repeat: no-repeat;
-    @include background-radial-gradient($sunBackground);
+    @include background-radial-gradient($sun);
     z-index: 10;
     opacity: 0.5;
 }
 
-$sunDayBackground: bottom,
+// Similar to the sun - a GRAY radial gradient, opaque in the noon, transparent in the midnight
+$sunDay: bottom,
 circle,
 rgba(252, 255, 251, 0.9) 0%,
 rgba(253, 250, 219, 0.4) 30%,
@@ -62,14 +65,15 @@ rgba(201, 165, 132, 0) 100%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: $skyHeight;
     background-repeat: no-repeat;
-    @include background-radial-gradient($sunDayBackground);
+    @include background-radial-gradient($sunDay);
     z-index: 999;
     opacity: 0.5;
 }
 
-$sunsetBackground: bottom,
+// Similar - the REDDISH radial gradient, transparent when the sun is high, almost opaque in the evening
+$sunset: bottom,
 circle,
 rgba(254, 255, 255, 0.8) 5%,
 rgba(236, 255, 0, 1) 10%,
@@ -81,14 +85,15 @@ rgba(93, 0, 0, 1) 100%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: $skyHeight;
     background-repeat: no-repeat;
-    @include background-radial-gradient($sunsetBackground);
+    @include background-radial-gradient($sunset);
     z-index: 999;
     opacity: 0.3;
 }
 
-$skyBackground: bottom,
+// The BLUEISH linear gradient, opaque in the mid-day, 50% at the sunset, vanishes in the night
+$sky: bottom,
 rgba(249, 251, 240, 1) 10%,
 rgba(215, 253, 254, 1) 20%,
 rgba(167, 222, 253, 1) 40%,
@@ -99,32 +104,32 @@ rgba(110, 175, 255, 1) 100%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: $skyHeight;
     z-index: 5;
-    @include background-linear-gradient($skyBackground);
+    @include background-linear-gradient($sky);
     opacity: 0.52;
 }
 
-$horizonBackground:bottom,
+// A YELLOWISH linear gradient, opaque at the sunset, disappearing the mid-day/night
+$horizon:bottom,
 rgba(212, 87, 43, 0.9) 0%,
 rgba(246, 149, 52, 0.8) 20%,
 rgba(24, 75, 106, 0) 100%;
-// A layer above the horizon, actually
-$layersAboveHorizon: 50%; // 50%
 #horizon {
     cursor: pointer;
     position: absolute;
     top: 0px;
     left: 0;
     width: 100%;
-    height: $layersAboveHorizon;
+    height: $skyHeight;
     background-repeat: no-repeat;
     z-index: 5;
-    @include background-linear-gradient($horizonBackground);
+    @include background-linear-gradient($horizon);
     opacity: 0.99;
 }
 
-$horizonNightBackground: bottom,
+// BLUE linear gradient, non-transparent only after ~10 in the night 
+$horizonNight: bottom,
 rgba(57, 167, 255, 1) 0%,
 rgba(13, 98, 245, 1) 20%,
 rgba(0, 11, 22, 0.1) 60%;
@@ -135,14 +140,15 @@ rgba(0, 11, 22, 0.1) 60%;
     top: 0px;
     left: 0;
     width: 100%;
-    height: $layersAboveHorizon;
+    height: $skyHeight;
     background-repeat: no-repeat;
     z-index: 10000;
-    @include background-linear-gradient($horizonNightBackground);
+    @include background-linear-gradient($horizonNight);
     opacity: 0;
 }
 
-$moonBackground: 40% 55%,
+// STEEL-colored radial gradient, is not visible till ~11 in the night 
+$moon: 40% 55%,
 circle,
 rgba(8, 49, 78, 1) 1%,
 rgba(8, 26, 56, 1) 10%,
@@ -153,14 +159,15 @@ rgba(2, 8, 13, 1) 70%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50%;
+    height: $skyHeight;
     background-repeat: no-repeat;
-    @include background-radial-gradient($moonBackground);
+    @include background-radial-gradient($moon);
     z-index: 10001;
     opacity: 0;
 }
 
-$waterBackground: bottom,
+// A static BLUE linear gradient
+$water: bottom,
 rgba(0, 25, 45, 1) 0%,
 rgba(14, 71, 117, 1) 35%,
 rgba(26, 126, 174, 1) 70%,
@@ -171,27 +178,29 @@ rgba(62, 168, 220, 1) 100%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 100%-$layersAboveHorizon;
+    height: 100%-$skyHeight;
     background-repeat: no-repeat;
-    @include background-linear-gradient($waterBackground);
+    @include background-linear-gradient($water);
     z-index: 10;
 }
 
+// Something to do with the perspectiveOrigin, not sure how
 #waterReflectionContainer {
     -webkit-perspective: 30;
     perspective: 30;
-    -webkit-perspective-origin: 50% -12%;
-    perspective-origin: 50% -12%;
+    -webkit-perspective-origin: $skyHeight -12%;
+    perspective-origin: $skyHeight -12%;
     overflow: hidden;
     position: absolute;
-    top: 50%;
+    top: $skyHeight;
     left: -3%;
     width: 103%;
-    height: 50%;
+    height: 100%-$skyHeight;
     z-index: 25;
 }
 
-$waterBackground: 50% 0px,
+// DARK-YELLOWISH radial gradient, only opaque around the sunset
+$water: 50% 0px,
 rgba(247, 177, 72, 1) 3%,
 rgba(248, 175, 65, 1) 6%,
 rgba(207, 62, 30, 0.4) 35%,
@@ -207,13 +216,14 @@ rgba(7, 19, 31, 0.0) 100%;
     width: 200%;
     height: 55%;
     background-repeat: no-repeat;
-    @include background-radial-gradient($waterBackground);
+    @include background-radial-gradient($water);
     z-index: 999;
     opacity: 0.7;
     @include rotateX(45deg);
 }
 
-$waterDistanceBackground:90deg,
+// GRAY liear gradient to make the water look darker at the horizon. Constant in the night, 60% opaque in the noon
+$waterDistance:90deg,
 rgba(0, 0, 0, 0.0) 10%,
 rgba(0, 0, 0, 0.20) 44%,
 rgba(0, 0, 0, 0.65) 95%,
@@ -223,12 +233,13 @@ rgba(0, 0, 0, 0.62) 100%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 100%-$layersAboveHorizon;
+    height: 100%-$skyHeight;
     background-repeat: no-repeat;
-    @include background-linear-gradient($waterDistanceBackground);
+    @include background-linear-gradient($waterDistance);
     z-index: 20;
 }
 
+// BLACK non-gradient layer above the horizon, transparent till ~8 in the evening, opaque in the midnight 
 #darknessOverlaySky {
     background-color: #000;
     opacity: 0;
@@ -236,10 +247,11 @@ rgba(0, 0, 0, 0.62) 100%;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: $layersAboveHorizon;
+    height: $skyHeight;
     z-index: 9999;
 }
 
+// BLACK non-gradient layer below the horizon, transparent till sunset, opaque in the midnight 
 #darknessOverlay {
     cursor: default;
     background-color: #000;
@@ -248,23 +260,24 @@ rgba(0, 0, 0, 0.62) 100%;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 100%-$layersAboveHorizon;
+    height: 100%-$skyHeight;
     z-index: 99;
 }
 
-$oceanRippleBackground: 175deg,
+// A static, slightly diagonal LIGHT-GRAY periodic lineral gradient 
+$oceanRipple: 175deg,
 rgba(165, 165, 165, 0.08) 43%,
 rgba(175, 175, 175, 0.08) 45%,
 rgba(235, 235, 235, 0.08) 49%,
 rgba(195, 195, 195, 0.08) 50%,
 rgba(165, 165, 165, 0.08) 54%;
 #oceanRipple {
-    @include background-image-repeating-linear-gradient($oceanRippleBackground);
+    @include background-image-repeating-linear-gradient($oceanRipple);
     opacity: 0.5;
     position: absolute;
     left: 0%;
     bottom: 0px;
     width: 100%;
-    height: 50%;
+    height: 100%-$skyHeight;
     z-index: 10;
 }
