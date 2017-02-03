@@ -1,6 +1,7 @@
 body {
   cursor: pointer;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: black; }
 
 #sun {
   position: absolute;
