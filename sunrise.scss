@@ -5,7 +5,7 @@ body {
     background-color: black;
 }
 
-$skyHeight: 50%;
+$skyHeight: 75%;
 @mixin background-radial-gradient($gradient) {
     background: -webkit-radial-gradient($gradient);
     background: -moz-radial-gradient($gradient);

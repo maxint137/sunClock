@@ -60,15 +60,16 @@ var sunrise;
             var moon = document.getElementById("moon");
             !moon ? null : moon.style.opacity = '' + this.moonOpacity();
             var horizonNight = document.getElementById("horizonNight");
-            !horizonNight ? null : horizonNight.style.opacity = '' + (this.mouse.y - (this.myHeight * 4 / 5)) / (this.myHeight - (this.myHeight * 4 / 5));
+            !horizonNight ? null : horizonNight.style.opacity = '' + (this.mouse.y - ((this.myHeight * this.skyProportion * 2) * 4 / 5))
+                / ((this.myHeight * (1 - this.skyProportion) * 2) - ((this.myHeight * (1 - this.skyProportion) * 2) * 4 / 5));
             var starsContainer = document.getElementById("starsContainer");
-            !starsContainer ? null : starsContainer.style.opacity = '' + (this.mouse.y / this.myHeight - 0.6);
+            !starsContainer ? null : starsContainer.style.opacity = '' + (this.mouse.y / (this.myHeight * this.skyProportion * 2) - 0.6);
             var waterDistance = document.getElementById("waterDistance");
-            !waterDistance ? null : waterDistance.style.opacity = '' + (this.mouse.y / this.myHeight + 0.6);
-            sunDay ? sunDay.style.opacity = '' + (1 - this.mouse.y / this.myHeight) : null;
+            !waterDistance ? null : waterDistance.style.opacity = '' + (this.mouse.y / (this.myHeight * (1 - this.skyProportion) * 2) + 0.6);
+            sunDay ? sunDay.style.opacity = '' + (1 - this.mouse.y / (this.myHeight * this.skyProportion * 2)) : null;
             var sky = document.getElementById("sky");
-            !sky ? null : sky.style.opacity = '' + Math.min((1 - this.mouse.y / this.myHeight), 0.99);
-            !sunSet ? null : sunSet.style.opacity = '' + (this.mouse.y / this.myHeight - 0.2);
+            !sky ? null : sky.style.opacity = '' + Math.min((1 - this.mouse.y / (this.myHeight * this.skyProportion * 2)), 0.99);
+            !sunSet ? null : sunSet.style.opacity = '' + (this.mouse.y / (this.myHeight * this.skyProportion * 2) - 0.2);
             var horizon = document.getElementById("horizon");
             !sun ? null : sun.style.opacity = '' + this.sunOpacity();
             !horizon ? null : horizon.style.opacity = '' + this.horizonOpacity();
@@ -101,7 +102,7 @@ var sunrise;
         };
         Sunrise.prototype.sunOpacity = function () {
             if (this.sunBelowHorizon()) {
-                return Math.min((this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2, 0.5);
+                return Math.min((this.myHeight - this.mouse.y) / (this.myHeight * (1 - this.skyProportion)) + 0.2, 0.5);
             }
             else {
                 return Math.min(this.mouse.y / (this.myHeight * this.skyProportion), 0.5);
@@ -109,7 +110,7 @@ var sunrise;
         };
         Sunrise.prototype.horizonOpacity = function () {
             if (this.sunBelowHorizon()) {
-                return (this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2;
+                return (this.myHeight - this.mouse.y) / (this.myHeight * (1 - this.skyProportion)) + 0.2;
             }
             else {
                 return Math.min(this.mouse.y / (this.myHeight * this.skyProportion), 0.99);
