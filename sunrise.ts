@@ -6,7 +6,14 @@ module sunrise {
         myWidth: number;
         myHeight: number;
 
-        constructor(public skyProportion: number = 0.5) { }
+        constructor(document: HTMLDocument, public skyProportion: number = 0.5) {
+            var that = this;
+            document.addEventListener('mousemove', function (e) {
+                that.changePictureByMouse(e);
+            }, false);
+
+            this.updateDimensions();
+        }
 
         changePictureByMouse(e: MouseEvent) {
             this.mouse.x = e.clientX || e.pageX;
@@ -97,7 +104,7 @@ module sunrise {
 
             !sun ? null : sun.style.opacity = '' + this.sunOpacity();
             !horizon ? null : horizon.style.opacity = '' + this.horizonOpacity()
-            !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = '' + this.waterReflectioniddleOpacity();
+            !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = '' + this.waterReflectionMiddleOpacity();
         }
 
         updateDimensions() {
@@ -130,7 +137,7 @@ module sunrise {
         }
 
         sunOpacity() {
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
+            if (this.sunBelowHorizon()) {
                 return Math.min((this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2, 0.5);
             }
             else {
@@ -139,7 +146,7 @@ module sunrise {
         }
 
         horizonOpacity() {
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
+            if (this.sunBelowHorizon()) {
                 return (this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2;
             }
             else {
@@ -147,27 +154,20 @@ module sunrise {
             }
         }
 
-        waterReflectioniddleOpacity(){
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
-                return (this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) - 0.1;
+        waterReflectionMiddleOpacity() {
+            var that = this;
+            if (that.sunBelowHorizon()) {
+                return (that.myHeight - that.mouse.y) / (that.myHeight * (1 - that.skyProportion)) - 0.1;
             } else {
-                return this.mouse.y / (this.myHeight * this.skyProportion) - 0.1;
+                return that.mouse.y / (that.myHeight * that.skyProportion) - 0.1;
             }
-
         }
 
+        sunBelowHorizon() {
+            return this.mouse.y > this.myHeight * this.skyProportion;
+        }
     }
 }
 
-var sr = new sunrise.Sunrise();
-
-function windowResize() {
-    sr.updateDimensions();
-}
-
-document.addEventListener('mousemove', function (e) {
-    sr.changePictureByMouse(e)
-}, false);
-
-
-
+var module: any;
+module.exports = sunrise;

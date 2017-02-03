@@ -1,10 +1,15 @@
 var sunrise;
 (function (sunrise) {
     var Sunrise = (function () {
-        function Sunrise(skyProportion) {
+        function Sunrise(document, skyProportion) {
             if (skyProportion === void 0) { skyProportion = 0.5; }
             this.skyProportion = skyProportion;
             this.mouse = { x: 0, y: 0 };
+            var that = this;
+            document.addEventListener('mousemove', function (e) {
+                that.changePictureByMouse(e);
+            }, false);
+            this.updateDimensions();
         }
         Sunrise.prototype.changePictureByMouse = function (e) {
             this.mouse.x = e.clientX || e.pageX;
@@ -67,7 +72,7 @@ var sunrise;
             var horizon = document.getElementById("horizon");
             !sun ? null : sun.style.opacity = '' + this.sunOpacity();
             !horizon ? null : horizon.style.opacity = '' + this.horizonOpacity();
-            !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = '' + this.waterReflectioniddleOpacity();
+            !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = '' + this.waterReflectionMiddleOpacity();
         };
         Sunrise.prototype.updateDimensions = function () {
             if (typeof (window.innerWidth) == 'number') {
@@ -95,7 +100,7 @@ var sunrise;
             return Math.min((this.mouse.y - (this.myHeight * 9 / 10)) / (this.myHeight - (this.myHeight * 9 / 10)), nightSkyDarkness);
         };
         Sunrise.prototype.sunOpacity = function () {
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
+            if (this.sunBelowHorizon()) {
                 return Math.min((this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2, 0.5);
             }
             else {
@@ -103,30 +108,29 @@ var sunrise;
             }
         };
         Sunrise.prototype.horizonOpacity = function () {
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
+            if (this.sunBelowHorizon()) {
                 return (this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) + 0.2;
             }
             else {
                 return Math.min(this.mouse.y / (this.myHeight * this.skyProportion), 0.99);
             }
         };
-        Sunrise.prototype.waterReflectioniddleOpacity = function () {
-            if (this.mouse.y > this.myHeight * this.skyProportion) {
-                return (this.myHeight - this.mouse.y) / (this.myHeight * this.skyProportion) - 0.1;
+        Sunrise.prototype.waterReflectionMiddleOpacity = function () {
+            var that = this;
+            if (that.sunBelowHorizon()) {
+                return (that.myHeight - that.mouse.y) / (that.myHeight * (1 - that.skyProportion)) - 0.1;
             }
             else {
-                return this.mouse.y / (this.myHeight * this.skyProportion) - 0.1;
+                return that.mouse.y / (that.myHeight * that.skyProportion) - 0.1;
             }
+        };
+        Sunrise.prototype.sunBelowHorizon = function () {
+            return this.mouse.y > this.myHeight * this.skyProportion;
         };
         return Sunrise;
     }());
     sunrise.Sunrise = Sunrise;
 })(sunrise || (sunrise = {}));
-var sr = new sunrise.Sunrise();
-function windowResize() {
-    sr.updateDimensions();
-}
-document.addEventListener('mousemove', function (e) {
-    sr.changePictureByMouse(e);
-}, false);
+var module;
+module.exports = sunrise;
 //# sourceMappingURL=sunrise.js.map

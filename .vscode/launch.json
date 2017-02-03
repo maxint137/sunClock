@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            // Name of configuration; appears in the launch configuration drop down menu.
+            "name": "Run mocha",
+            // Type of configuration. Possible values: "node", "mono".
+            "type": "node",
+            "request": "attach",
+            // Workspace relative or absolute path to the program.
+            "program": "C:/Users/maxlevy/AppData/Roaming/npm/node_modules/mocha/bin/mocha",
+            // Automatically stop program after launch.
+            "stopOnEntry": false,
+            "args": ["test/**/*.js", "--no-timeouts", "--colors"],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": { "NODE_ENV": "testing" }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${file}",
+            "cwd": "${workspaceRoot}",
+            "outFiles": []
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Process",
+            "port": 5858,
+            "outFiles": []
+        }
+    ]
+}

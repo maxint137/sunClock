@@ -1,27 +1,34 @@
 {
-    "name": "sun-clock",
-    "version": "0.1.0",
-    "description": "Just a clock to run on your (otherwise useless) Surface RT.",
-    "homepage": "https://htmlpreview.github.io/?https://github.com/maxint137/sunClock/blob/master/clock.html",
-    "keywords": [
-        "clock",
-        "sunset",
-        "sunrise",
-        "SurfaceRT"
-    ],
-    "author": "Max Levy",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/maxint137/sunClock.git"
-    },
-    "dependencies": {
-        "jquery": "^3.1.1",
-        "suncalc": "^1.8.0"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-less": "^3.3.0",
-        "gulp-sass": "^3.1.0",
-        "@types/jquery": "^2.0.40"
-    }
+  "name": "sun-clock",
+  "version": "0.1.0",
+  "description": "Just a clock to run on your (otherwise useless) Surface RT.",
+  "homepage": "https://htmlpreview.github.io/?https://github.com/maxint137/sunClock/blob/master/clock.html",
+  "keywords": [
+    "clock",
+    "sunset",
+    "sunrise",
+    "SurfaceRT"
+  ],
+  "author": "Max Levy",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maxint137/sunClock.git"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "suncalc": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/jquery": "^2.0.40",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.0",
+    "gulp-sass": "^3.1.0",
+    "jsdom": "^9.9.1",
+    "mocha": "^3.2.0",
+    "mocha-jsdom": "^1.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
 }
