@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "mocha": "registry:dt/mocha#2.2.5+20170204022515"
+  },
+  "dependencies": {
+    "jsdom": "registry:dt/jsdom#2.0.0+20160915014424"
+  }
+}
