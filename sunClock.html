@@ -36,7 +36,7 @@
                 <div class="marker fourten"></div>
                 <div class="marker fiveeleven"></div>
 
-                <a href="https://rawgit.com/maxint137/sunClock/master/clock.html">
+                <a href="https://rawgit.com/maxint137/sunClock/master/sunClock.html">
                     <div class="inner_face" data-after="山吹町">
                         <div class="hand hour"></div>
                         <div class="hand minute"></div>
@@ -92,7 +92,7 @@
         }
 
 
-        function updateclock() {
+        function updateclock(timestamp, firstCall) {
 
             var curdate = new Date();
 
@@ -111,7 +111,7 @@
                 transform: 'rotate(' + second_as_degree + 'deg)'
             })
 
-            if (0 == curdate.getSeconds() % 5) {
+            if (firstCall || 0 == curdate.getSeconds() % 5) {
                 var times = SunCalc.getTimes(new Date(), latlng.lat, latlng.lng);
                 var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
                 $("#lightswitch").prop("checked", !lightsOn);
@@ -128,6 +128,8 @@
 
             requestAnimationFrame(updateclock)
         }
+
+        updateclock(7, true);
 
         requestAnimationFrame(updateclock)
 
