@@ -25,7 +25,6 @@ export class Sunrise {
 
         document.addEventListener('mousemove', function (e) {
             //that.changePictureByMouse(e);
-            console.log(e.clientX + " " + e.clientY);
         }, false);
 
         // IE9, Chrome, Safari, Opera
@@ -34,6 +33,14 @@ export class Sunrise {
         //document.addEventListener("DOMMouseScroll", e=>that.mouseWheelHandler(e), false);
 
         this.updateDimensions();
+    }
+
+    setCurrentTime(curTime: Date) {
+
+        this.curPos = (curTime.getHours()*60 + curTime.getMinutes()) * this.myWidth / 24*60;
+        document.getElementById("curTime").innerText=curTime.toTimeString();
+        
+        this.moveSun(this.wheelPos2sunPos());
     }
 
     wheelPos2sunPos(): any {
@@ -68,7 +75,7 @@ export class Sunrise {
         let curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos/this.myWidth*24*60*60000);
         document.getElementById("curTime").innerText=curTime.toTimeString();
 
-        this.moveSun(this.wheelPos2sunPos());        
+        this.moveSun(this.wheelPos2sunPos());
     }
 
     changePictureByMouse(e: MouseEvent) {

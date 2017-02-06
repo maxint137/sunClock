@@ -1,0 +1,179 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sun Clock</title>
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/maxint137/sunClock/master/css3clock.css" />
+    <link href="sunrise.css" rel="stylesheet">
+    <style>
+        .outer_face .marker,
+        .outer_face::before,
+        .outer_face::after,
+        .inner_face {
+            background: transparent;
+        }
+        
+        .outer_face .marker,
+        input#lightswitch:checked~.main .square .outer_face::before,
+        input#lightswitch:checked~.main .square .outer_face::after,
+        input#lightswitch:checked~.main .square .outer_face,
+        input#lightswitch:checked~.main .square .inner_face {
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="curTime" style="
+    z-index: 1000;
+    color: orange;
+    position: absolute;">curTime</div>
+
+    <input type="checkbox" id="lightswitch" />
+    <div class="main">
+        <div class="square">
+
+            <div id="liveclock" class="outer_face bgNight">
+
+                <div class="marker oneseven bgNight"></div>
+                <div class="marker twoeight"></div>
+                <div class="marker fourten"></div>
+                <div class="marker fiveeleven"></div>
+
+                <a href="https://rawgit.com/maxint137/sunClock/master/clock.html">
+                    <div class="inner_face" data-after="山吹町">
+                        <div class="hand hour"></div>
+                        <div class="hand minute"></div>
+                        <div class="hand second"></div>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sun"></div>
+    <div id="sunDay"></div>
+    <div id="sunSet"></div>
+    <div id="sky"></div>
+
+    <div id="horizon"></div>
+
+    <div id="horizonNight"></div>
+
+    <div id="moon"></div>
+    <div id="water"></div>
+
+    <div id="waterReflectionContainer">
+        <div id="waterReflectionMiddle"></div>
+    </div>
+
+    <div id="waterDistance"></div>
+    <div id="darknessOverlaySky"></div>
+    <div id="darknessOverlay"></div>
+    <div id="oceanRipple"></div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
+
+    <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
+    <script>
+        var sr = new Sunrise(document, 0.75);
+
+        function windowResize() {
+            sr.updateDimensions();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var latlng = {
+            lat: 35.7075239,
+            lng: 139.729803
+        }
+
+        var $hands = $('#liveclock div.hand')
+
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
+            setTimeout(f, 60)
+        }
+
+
+        function updateclock() {
+
+            var curdate = new Date();
+
+
+            var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360
+            var minute_as_degree = (curdate.getMinutes() + curdate.getSeconds() / 60) / 60 * 360
+            var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360
+
+            $hands.filter('.hour').css({
+                transform: 'rotate(' + hour_as_degree + 'deg)'
+            })
+            $hands.filter('.minute').css({
+                transform: 'rotate(' + minute_as_degree + 'deg)'
+            })
+            $hands.filter('.second').css({
+                transform: 'rotate(' + second_as_degree + 'deg)'
+            })
+
+            if (0 == curdate.getSeconds() % 5) {
+                var times = SunCalc.getTimes(new Date(), latlng.lat, latlng.lng);
+                var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
+                $("#lightswitch").prop("checked", !lightsOn);
+
+                // update the barckground too:
+                sr.setCurrentTime(curdate);
+
+            }
+
+            requestAnimationFrame(updateclock)
+        }
+
+        requestAnimationFrame(updateclock)
+
+        function initMap() {
+            navigator.geolocation.getCurrentPosition(function(location) {
+                latlng.lat = location.coords.latitude;
+                latlng.lng = location.coords.longitude;
+                console.log(latlng);
+
+                geodecode(latlng);
+            });
+
+        }
+
+        function geodecode(latlng) {
+            var geocoder = new google.maps.Geocoder;
+
+            var locationNames = [];
+            geocoder.geocode({
+                'location': latlng
+            }, function(results, status) {
+                if (status === 'OK') {
+                    results.forEach(function(result) {
+                        // find sublocality or locality in types of address_components
+                        result.address_components.forEach(function(ac) {
+                            if (-1 < ac.types.indexOf('locality')) {
+                                locationNames.push(ac.short_name);
+                            }
+
+                        }, this);
+                    }, this);
+
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+
+                console.log(locationNames);
+                $('.inner_face').attr('data-after', locationNames[0]);
+
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGXhTSdPtnyhV3GNq20bu9V_Qu1e5Fjc&callback=initMap">
+    </script>
+</body>
+
+</html>

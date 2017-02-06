@@ -15,7 +15,6 @@ var Sunrise = (function () {
         var that = this;
         document.addEventListener('mousemove', function (e) {
             //that.changePictureByMouse(e);
-            console.log(e.clientX + " " + e.clientY);
         }, false);
         // IE9, Chrome, Safari, Opera
         document.addEventListener("mousewheel", function (e) { return that.mouseWheelHandler(e); }, false);
@@ -23,6 +22,11 @@ var Sunrise = (function () {
         //document.addEventListener("DOMMouseScroll", e=>that.mouseWheelHandler(e), false);
         this.updateDimensions();
     }
+    Sunrise.prototype.setCurrentTime = function (curTime) {
+        this.curPos = (curTime.getHours() * 60 + curTime.getMinutes()) * this.myWidth / 24 * 60;
+        document.getElementById("curTime").innerText = curTime.toTimeString();
+        this.moveSun(this.wheelPos2sunPos());
+    };
     Sunrise.prototype.wheelPos2sunPos = function () {
         var noon = new Date(this.times.solarNoon);
         var nnPx = this.myWidth * (noon.getHours() * 60 + noon.getMinutes()) / 24 / 60;
