@@ -73,15 +73,13 @@
     <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
 
     <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
-    <script>
+    <script type="text/javascript">
         var sr = new Sunrise(document, 0.75);
 
         function windowResize() {
             sr.updateDimensions();
         }
-    </script>
 
-    <script type="text/javascript">
         var latlng = {
             lat: 35.7075239,
             lng: 139.729803
@@ -120,7 +118,12 @@
 
                 // update the barckground too:
                 sr.setCurrentTime(curdate);
+            }
 
+            // refresh the sunrise data once a night
+            if (0 == curdate.getHours() && 7 == curdate.getMinutes() && 5 == curdate.getSeconds()) {
+                sr = new Sunrise(document, 0.75);
+                console.log(sr.times);
             }
 
             requestAnimationFrame(updateclock)
