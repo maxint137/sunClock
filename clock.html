@@ -81,10 +81,11 @@
             navigator.geolocation.getCurrentPosition(function(location) {
                 latlng.lat = location.coords.latitude;
                 latlng.lng = location.coords.longitude;
-                console.log(latlng)
+                console.log(latlng);
+
+                geodecode(latlng);
             });
 
-            geodecode(latlng);
         }
 
         function geodecode(latlng) {
