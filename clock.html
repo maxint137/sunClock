@@ -32,9 +32,8 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    <script src="http://suncalc.net/scripts/suncalc.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
 
     <script type="text/javascript">
         /***********************************************
@@ -68,8 +67,8 @@
             })
 
             if (0 == curdate.getSeconds() % 5) {
-                var times = SunCalc.getDayInfo(new Date(), 35.7075239, 139.729803);
-                var lightsOn = times.sunrise.end < new Date() && new Date() < times.sunset.end;
+                var times = SunCalc.getTimes(new Date(), 35.7075239, 139.729803);
+                var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
                 $("#lightswitch").prop("checked", !lightsOn);
             }
 
