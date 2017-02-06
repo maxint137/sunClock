@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>A Stolen Clock</title>
-    <link rel="stylesheet" type="text/css" href="css3clock.css" />
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/maxint137/sunClock/master/css3clock.css" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                 <div class="marker fourten"></div>
                 <div class="marker fiveeleven"></div>
 
-                <a href="http://htmlpreview.github.io/?https://github.com/maxint137/sunClock/blob/master/clock.html">
+                <a href="https://rawgit.com/maxint137/sunClock/master/clock.html">
                     <div class="inner_face" data-after="山吹町">
                         <div class="hand hour"></div>
                         <div class="hand minute"></div>
@@ -99,8 +99,7 @@
                     results.forEach(function(result) {
                         // find sublocality or locality in types of address_components
                         result.address_components.forEach(function(ac) {
-                            if (-1 < ac.types.indexOf('sublocality') ||
-                                -1 < ac.types.indexOf('locality')) {
+                            if (-1 < ac.types.indexOf('locality')) {
                                 locationNames.push(ac.short_name);
                             }
 
