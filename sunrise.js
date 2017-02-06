@@ -27,6 +27,7 @@ var Sunrise = (function () {
         var noon = new Date(this.times.solarNoon);
         var nnPx = this.myWidth * (noon.getHours() * 60 + noon.getMinutes()) / 24 / 60;
         if (this.curPos < nnPx) {
+            //  before noon
             var sunrise = new Date(this.times.sunrise);
             var srPx = this.myWidth / 24 / 60 * (sunrise.getHours() * 60 + sunrise.getMinutes());
             //y = -(x-srPx)/(nnPx-srPx)*hr + hr

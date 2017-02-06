@@ -69,7 +69,7 @@ rgba(201, 165, 132, 0) 100%;
     height: $skyHeight;
     background-repeat: no-repeat;
     @include background-radial-gradient($sunDay);
-    z-index: 999;
+    z-index: 30;
     opacity: 0.5;
 }
 
@@ -89,7 +89,7 @@ rgba(93, 0, 0, 1) 100%;
     height: $skyHeight;
     background-repeat: no-repeat;
     @include background-radial-gradient($sunset);
-    z-index: 999;
+    z-index: 30;
     opacity: 0.3;
 }
 
@@ -143,7 +143,7 @@ rgba(0, 11, 22, 0.1) 60%;
     width: 100%;
     height: $skyHeight;
     background-repeat: no-repeat;
-    z-index: 10000;
+    z-index: 40;
     @include background-linear-gradient($horizonNight);
     opacity: 0;
 }
@@ -163,7 +163,7 @@ rgba(2, 8, 13, 1) 70%;
     height: $skyHeight;
     background-repeat: no-repeat;
     @include background-radial-gradient($moon);
-    z-index: 10001;
+    z-index: 41;
     opacity: 0;
 }
 
@@ -218,7 +218,7 @@ rgba(7, 19, 31, 0.0) 100%;
     height: 55%;
     background-repeat: no-repeat;
     @include background-radial-gradient($water);
-    z-index: 999;
+    z-index: 30;
     opacity: 0.7;
     @include rotateX(45deg);
 }
@@ -249,7 +249,7 @@ rgba(0, 0, 0, 0.62) 100%;
     left: 0px;
     width: 100%;
     height: $skyHeight;
-    z-index: 999;
+    z-index: 30;
 }
 
 // BLACK non-gradient layer below the horizon, transparent till sunset, opaque in the midnight 
@@ -262,7 +262,7 @@ rgba(0, 0, 0, 0.62) 100%;
     left: 0px;
     width: 100%;
     height: 100%-$skyHeight;
-    z-index: 99;
+    z-index: 27;
 }
 
 // A static, slightly diagonal LIGHT-GRAY periodic lineral gradient 

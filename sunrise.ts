@@ -42,6 +42,7 @@ export class Sunrise {
         let nnPx = this.myWidth * (noon.getHours() * 60 + noon.getMinutes()) / 24 / 60;
 
         if (this.curPos < nnPx) {
+            //  before noon
             let sunrise = new Date(this.times.sunrise);
             let srPx = this.myWidth / 24 / 60 * (sunrise.getHours() * 60 + sunrise.getMinutes());
 
