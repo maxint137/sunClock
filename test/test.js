@@ -5,9 +5,7 @@ var jsdom = require("mocha-jsdom");
 var App = require("../sunrise");
 describe('Sunrise', function () {
     jsdom();
-    it('waterReflectionMiddle Opacity is the same thoughout the day', function (done) {
-        var sr0 = new App.Sunrise(document);
-        var sr1 = new App.Sunrise(document, 0.75);
+    function runTest(sr0, sr1, methodUnderTetst) {
         {
             var noon = { clientX: 137, clientY: 1 };
             sr0.changePictureByMouse(noon);
@@ -30,6 +28,41 @@ describe('Sunrise', function () {
             var diff = Math.abs(sr0.waterReflectionMiddleOpacity() - sr1.waterReflectionMiddleOpacity());
             chai_1.expect(diff).to.be.below(Math.abs(sr0.waterReflectionMiddleOpacity() / 10), "at sunrise");
         }
+    }
+    it('waterReflectionMiddleOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.waterReflectionMiddleOpacity);
+        done();
+    });
+    it('horizonOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.horizonOpacity);
+        done();
+    });
+    it('sunOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.sunOpacity);
+        done();
+    });
+    it('moonOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.moonOpacity);
+        done();
+    });
+    it('darknessOverlaySkyOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.darknessOverlaySkyOpacity);
+        done();
+    });
+    it('darknessOverlayOpacity is consistent', function (done) {
+        var sr0 = new App.Sunrise(document);
+        var sr1 = new App.Sunrise(document, 0.75);
+        runTest(sr0, sr1, App.Sunrise.prototype.darknessOverlayOpacity);
         done();
     });
 });
