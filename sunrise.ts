@@ -1,16 +1,31 @@
+/// <reference path="suncalc.d.ts" />
+
+
 export class Sunrise {
 
     mouse: any = { x: 0, y: 0 };
     myWidth: number;
     myHeight: number;
 
+    times: SunCalc.SunTimes;
+
     curPos: number = 0;
 
     constructor(document: HTMLDocument, public skyProportion: number = 0.5) {
+
+        let latlng = {
+            lat: 35.7075239,
+            lng: 139.729803
+        }
+
+        // UF: need to update that once a day
+        this.times = SunCalc.getTimes(new Date(), latlng.lat, latlng.lng);
+        
         let that = this;
+
         document.addEventListener('mousemove', function (e) {
             //that.changePictureByMouse(e);
-              console.log(e.clientX + " " + e.clientY);
+            console.log(e.clientX + " " + e.clientY);
         }, false);
 
         // IE9, Chrome, Safari, Opera
@@ -21,15 +36,38 @@ export class Sunrise {
         this.updateDimensions();
     }
 
+    wheelPos2sunPos(): any {
+
+        let noon = new Date(this.times.solarNoon);
+        let nnPx = this.myWidth * (noon.getHours() * 60 + noon.getMinutes()) / 24 / 60;
+
+        if (this.curPos < nnPx) {
+            let sunrise = new Date(this.times.sunrise);
+            let srPx = this.myWidth / 24 / 60 * (sunrise.getHours() * 60 + sunrise.getMinutes());
+
+            //y = -(x-srPx)/(nnPx-srPx)*hr + hr
+            return { clientX: this.curPos, clientY: -(this.curPos - srPx) / (nnPx - srPx) * this.myHeight * this.skyProportion + this.myHeight * this.skyProportion};
+        }
+        else {
+            let sunset = new Date(this.times.sunset);
+            let ssPx = this.myWidth / 24 / 60 * (sunset.getHours() * 60 + sunset.getMinutes());
+
+            //y = (x-ssPx)/(nnPx-ssPx)*hr + hr
+            return { clientX: this.curPos, clientY: -(this.curPos - ssPx) / (nnPx - ssPx) * this.myHeight * this.skyProportion + this.myHeight * this.skyProportion};
+        }
+    }
+
     mouseWheelHandler(e: MouseWheelEvent) {
 
         let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 
         let wheelStep = 10;
         this.curPos = Math.max(0, Math.min(this.myWidth, this.curPos + delta * wheelStep));
-        
-        let newPos = { clientX: this.curPos, clientY: (this.curPos < this.myWidth/2 ? 1 : -1)*(this.myHeight - 2.0*this.myHeight/this.myWidth * this.curPos)};
-        this.moveSun( newPos );
+
+        let curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos/this.myWidth*24*60*60000);
+        document.getElementById("curTime").innerText=curTime.toTimeString();
+
+        this.moveSun(this.wheelPos2sunPos());        
     }
 
     changePictureByMouse(e: MouseEvent) {
