@@ -145,7 +145,7 @@ body {
 }
 
 .inner_face::after {
-    content: "山吹町";
+    content: attr(data-after);
     position: absolute;
     width: 100%;
     font: normal 2.0em Arial;
@@ -203,17 +203,17 @@ body {
     background: red;
 }
 
-input#lightswitch:checked ~ .main,
-input#lightswitch:checked ~ .main .square,
-input#lightswitch:checked ~ .main .square .outer_face,
-input#lightswitch:checked ~ .main .square .inner_face {
+input#lightswitch:checked~.main,
+input#lightswitch:checked~.main .square,
+input#lightswitch:checked~.main .square .outer_face,
+input#lightswitch:checked~.main .square .inner_face {
     background-color: black;
 }
 
-input#lightswitch:checked ~ .main .square .outer_face::before,
-input#lightswitch:checked ~ .main .square .outer_face::after,
-input#lightswitch:checked ~ .main .square .inner_face::before,
-input#lightswitch:checked ~ .main .square .hand.minute,
-input#lightswitch:checked ~ .main .square .hand.hour {
+input#lightswitch:checked~.main .square .outer_face::before,
+input#lightswitch:checked~.main .square .outer_face::after,
+input#lightswitch:checked~.main .square .inner_face::before,
+input#lightswitch:checked~.main .square .hand.minute,
+input#lightswitch:checked~.main .square .hand.hour {
     background-color: white;
 }

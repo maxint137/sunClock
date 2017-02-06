@@ -21,7 +21,7 @@
                 <div class="marker fiveeleven"></div>
 
                 <a href="http://htmlpreview.github.io/?https://github.com/maxint137/sunClock/blob/master/clock.html">
-                    <div class="inner_face">
+                    <div class="inner_face" data-after="山吹町">
                         <div class="hand hour"></div>
                         <div class="hand minute"></div>
                         <div class="hand second"></div>
@@ -36,18 +36,10 @@
     <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
 
     <script type="text/javascript">
-        var whereAmI = {
-            latitude: 35.7075239,
-            longitude: 139.729803
+        var latlng = {
+            lat: 35.7075239,
+            lng: 139.729803
         }
-        navigator.geolocation.getCurrentPosition(function(location) {
-            console.log(location.coords.latitude);
-            console.log(location.coords.longitude);
-            console.log(location.coords.accuracy);
-
-            whereAmI.latitude = location.coords.latitude;
-            whereAmI.longitude = location.coords.longitude;
-        });
 
         var $hands = $('#liveclock div.hand')
 
@@ -75,7 +67,7 @@
             })
 
             if (0 == curdate.getSeconds() % 5) {
-                var times = SunCalc.getTimes(new Date(), whereAmI.latitude, whereAmI.longitude);
+                var times = SunCalc.getTimes(new Date(), latlng.lat, latlng.lng);
                 var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
                 $("#lightswitch").prop("checked", !lightsOn);
             }
@@ -84,6 +76,47 @@
         }
 
         requestAnimationFrame(updateclock)
+
+        function initMap() {
+            navigator.geolocation.getCurrentPosition(function(location) {
+                latlng.lat = location.coords.latitude;
+                latlng.lng = location.coords.longitude;
+                console.log(latlng)
+            });
+
+            geodecode(latlng);
+        }
+
+        function geodecode(latlng) {
+            var geocoder = new google.maps.Geocoder;
+
+            var locationNames = [];
+            geocoder.geocode({
+                'location': latlng
+            }, function(results, status) {
+                if (status === 'OK') {
+                    results.forEach(function(result) {
+                        // find sublocality or locality in types of address_components
+                        result.address_components.forEach(function(ac) {
+                            if (-1 < ac.types.indexOf('sublocality') ||
+                                -1 < ac.types.indexOf('locality')) {
+                                locationNames.push(ac.short_name);
+                            }
+
+                        }, this);
+                    }, this);
+
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+
+                console.log(locationNames);
+                $('.inner_face').attr('data-after', locationNames[0]);
+
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGXhTSdPtnyhV3GNq20bu9V_Qu1e5Fjc&callback=initMap">
     </script>
 </body>
 
