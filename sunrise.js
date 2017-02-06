@@ -24,7 +24,7 @@ var Sunrise = (function () {
     }
     Sunrise.prototype.setCurrentTime = function (curTime) {
         this.curPos = (curTime.getHours() * 60 + curTime.getMinutes()) * this.myWidth / 24 * 60;
-        document.getElementById("curTime").innerText = curTime.toTimeString();
+        //document.getElementById("curTime").innerText=curTime.toTimeString();
         this.moveSun(this.wheelPos2sunPos());
     };
     Sunrise.prototype.wheelPos2sunPos = function () {
