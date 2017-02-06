@@ -36,10 +36,18 @@
     <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
 
     <script type="text/javascript">
-        /***********************************************
-         * CSS3 Analog Clock- by JavaScript Kit (www.javascriptkit.com)
-         * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and 100s more
-         ***********************************************/
+        var whereAmI = {
+            latitude: 35.7075239,
+            longitude: 139.729803
+        }
+        navigator.geolocation.getCurrentPosition(function(location) {
+            console.log(location.coords.latitude);
+            console.log(location.coords.longitude);
+            console.log(location.coords.accuracy);
+
+            whereAmI.latitude = location.coords.latitude;
+            whereAmI.longitude = location.coords.longitude;
+        });
 
         var $hands = $('#liveclock div.hand')
 
@@ -67,7 +75,7 @@
             })
 
             if (0 == curdate.getSeconds() % 5) {
-                var times = SunCalc.getTimes(new Date(), 35.7075239, 139.729803);
+                var times = SunCalc.getTimes(new Date(), whereAmI.latitude, whereAmI.longitude);
                 var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
                 $("#lightswitch").prop("checked", !lightsOn);
             }
