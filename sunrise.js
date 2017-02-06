@@ -4,13 +4,44 @@ var Sunrise = (function () {
         if (skyProportion === void 0) { skyProportion = 0.5; }
         this.skyProportion = skyProportion;
         this.mouse = { x: 0, y: 0 };
+        this.curPos = 0;
         var that = this;
         document.addEventListener('mousemove', function (e) {
-            that.changePictureByMouse(e);
+            //that.changePictureByMouse(e);
+            console.log(e.clientX + " " + e.clientY);
         }, false);
+        // IE9, Chrome, Safari, Opera
+        document.addEventListener("mousewheel", function (e) { return that.mouseWheelHandler(e); }, false);
+        // Firefox
+        //document.addEventListener("DOMMouseScroll", e=>that.mouseWheelHandler(e), false);
         this.updateDimensions();
     }
+    Sunrise.prototype.mouseWheelHandler = function (e) {
+        var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+        var wheelStep = 10;
+        this.curPos = Math.max(0, Math.min(this.myWidth, this.curPos + delta * wheelStep));
+        var newPos = { clientX: this.curPos, clientY: (this.curPos < this.myWidth / 2 ? 1 : -1) * (this.myHeight - 2.0 * this.myHeight / this.myWidth * this.curPos) };
+        this.moveSun(newPos);
+    };
     Sunrise.prototype.changePictureByMouse = function (e) {
+        this.moveSun(e);
+    };
+    Sunrise.prototype.updateDimensions = function () {
+        if (typeof (window.innerWidth) == 'number') {
+            //Non-IE
+            this.myWidth = window.innerWidth;
+            this.myHeight = window.innerHeight;
+        }
+        else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+            this.myWidth = document.documentElement.clientWidth;
+            this.myHeight = document.documentElement.clientHeight;
+        }
+        else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+            this.myWidth = document.body.clientWidth;
+            this.myHeight = document.body.clientHeight;
+        }
+    };
+    Sunrise.prototype.moveSun = function (e) {
         this.mouse.x = e.clientX || e.pageX;
         this.mouse.y = e.clientY || e.pageY;
         this.updateDimensions();
@@ -74,21 +105,6 @@ var Sunrise = (function () {
         !horizon ? null : horizon.style.opacity = '' + this.horizonOpacity();
         !waterReflectionMiddle ? null : waterReflectionMiddle.style.opacity = '' + this.waterReflectionMiddleOpacity();
     };
-    Sunrise.prototype.updateDimensions = function () {
-        if (typeof (window.innerWidth) == 'number') {
-            //Non-IE
-            this.myWidth = window.innerWidth;
-            this.myHeight = window.innerHeight;
-        }
-        else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-            this.myWidth = document.documentElement.clientWidth;
-            this.myHeight = document.documentElement.clientHeight;
-        }
-        else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-            this.myWidth = document.body.clientWidth;
-            this.myHeight = document.body.clientHeight;
-        }
-    };
     Sunrise.prototype.darknessOverlayOpacity = function () {
         return Math.min((this.mouse.y - (this.myHeight * this.skyProportion)) / (this.myHeight * this.skyProportion), 1);
     };
@@ -130,3 +146,4 @@ var Sunrise = (function () {
     return Sunrise;
 }());
 exports.Sunrise = Sunrise;
+//# sourceMappingURL=sunrise.js.map
