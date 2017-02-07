@@ -37,7 +37,7 @@ export class Sunrise {
 
     setCurrentTime(curTime: Date) {
 
-        this.curPos = (curTime.getHours()*60 + curTime.getMinutes()) * this.myWidth / 24*60;
+        this.curPos = (curTime.getHours()*60 + curTime.getMinutes()) * this.myWidth / (24*60);
 
         //document.getElementById("curTime").innerText=curTime.toTimeString();
         
