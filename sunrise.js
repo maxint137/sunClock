@@ -48,8 +48,8 @@ var Sunrise = (function () {
         var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
         var wheelStep = 10;
         this.curPos = Math.max(0, Math.min(this.myWidth, this.curPos + delta * wheelStep));
-        var curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos / this.myWidth * 24 * 60 * 60000);
-        document.getElementById("curTime").innerText = curTime.toTimeString();
+        // let curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos/this.myWidth*24*60*60000);
+        // document.getElementById("curTime").innerText=curTime.toTimeString();
         this.moveSun(this.wheelPos2sunPos());
     };
     Sunrise.prototype.changePictureByMouse = function (e) {
@@ -174,6 +174,5 @@ var Sunrise = (function () {
     };
     return Sunrise;
 }());
-var exports = {};
 exports.Sunrise = Sunrise;
 //# sourceMappingURL=sunrise.js.map

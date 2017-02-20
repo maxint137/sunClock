@@ -72,8 +72,8 @@ export class Sunrise {
         let wheelStep = 10;
         this.curPos = Math.max(0, Math.min(this.myWidth, this.curPos + delta * wheelStep));
 
-        let curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos/this.myWidth*24*60*60000);
-        document.getElementById("curTime").innerText=curTime.toTimeString();
+        // let curTime = new Date(new Date(2017, 0, 24).getTime() + this.curPos/this.myWidth*24*60*60000);
+        // document.getElementById("curTime").innerText=curTime.toTimeString();
 
         this.moveSun(this.wheelPos2sunPos());
     }

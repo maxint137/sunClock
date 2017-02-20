@@ -38,7 +38,7 @@ s<html>
                 <div class="marker fiveeleven"></div>
 
                 <a href="https://goo.gl/0zQ7OV">
-                    <div class="inner_face" data-after="山吹町">
+                    <div class="inner_face" id="location" data-after="山吹町">
                         <div class="hand hour"></div>
                         <div class="hand minute"></div>
                         <div class="hand second"></div>
@@ -144,7 +144,8 @@ s<html>
                     geodecode(latlng);
                 }, function(ah) {
                     console.log("getCurrentPosition failed, code=" + ah.code);
-                    alert("Can't get the current location - can't calculate the sun position")
+                    alert("Can't get the current location. So we can't calculate the sun position");
+                    document.getElementById("location").setAttribute("data-after", ".");
                 }
             );
         }
@@ -172,8 +173,10 @@ s<html>
                 }
 
                 console.log(locationNames);
-                $('.inner_face').attr('data-after', locationNames[0]);
-
+                $('.inner_face').attr('data-after',
+                        locationNames[0]
+                            ?locationNames[0]
+                            :(Math.round(latlng.lat*100)/100)+ "°, " + Math.round(latlng.lng*100)/100 + "°");
             });
         }
     </script>
