@@ -1,6 +1,5 @@
 /// <reference path="suncalc.d.ts" />
 
-
 export class Sunrise {
 
     mouse: any = { x: 0, y: 0 };

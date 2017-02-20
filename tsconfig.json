@@ -9,5 +9,8 @@
          "removeComments": false,
          "noImplicitAny": false,
          "watch": true
-     }
+     },
+     "files": [
+         "./sunrise.ts"
+     ]
  }

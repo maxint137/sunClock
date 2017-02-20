@@ -174,5 +174,6 @@ var Sunrise = (function () {
     };
     return Sunrise;
 }());
+var exports = {};
 exports.Sunrise = Sunrise;
 //# sourceMappingURL=sunrise.js.map
