@@ -88,12 +88,17 @@ s<html>
 
         var $hands = $('#liveclock div.hand')
 
+        var fps = 1000/60;
+        if(getUrlParameter('sharpSeconds')) {
+            fps = 1000;
+        }
+        
         window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
-            setTimeout(f, 60)
+            setTimeout(f, fps)
         }
 
 
-        function updateclock(timestamp, firstCall) {
+        function updateClock(timestamp, firstCall) {
 
             var curdate = new Date();
 
@@ -126,12 +131,12 @@ s<html>
                 sr = new Sunrise(document, 0.75);
                 console.log(sr.times);
             }
-
-            requestAnimationFrame(updateclock)
         }
 
-        updateclock(7, true);
-
+        updateClock(true);
+        // calling raf from updateClock looks spooky - the call stack is endless, so:
+        setInterval(function(){requestAnimationFrame(updateClock)}, fps);
+        
         requestAnimationFrame(updateclock)
 
         function initMap() {
