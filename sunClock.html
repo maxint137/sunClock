@@ -136,8 +136,6 @@ s<html>
         updateClock(true);
         // calling raf from updateClock looks spooky - the call stack is endless, so:
         setInterval(function(){requestAnimationFrame(updateClock)}, fps);
-        
-        requestAnimationFrame(updateclock)
 
         function initMap() {
             navigator.geolocation.getCurrentPosition(
