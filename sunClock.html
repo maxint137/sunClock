@@ -89,7 +89,7 @@ s<html>
         var $hands = $('#liveclock div.hand')
 
         var fps = 1000;
-        if(!getUrlParameter('sharpSeconds')) {
+        if(getUrlParameter('noSeconds')) {
             fps = 1000/60;
         }
         
