@@ -88,9 +88,9 @@ s<html>
 
         var $hands = $('#liveclock div.hand')
 
-        var fps = 1000/60;
-        if(getUrlParameter('sharpSeconds')) {
-            fps = 1000;
+        var fps = 1000;
+        if(!getUrlParameter('sharpSeconds')) {
+            fps = 1000/60;
         }
         
         window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
