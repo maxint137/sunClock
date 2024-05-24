@@ -1,12 +1,14 @@
 <html>
-  <head>
-    <link href="sunrise.css" rel="stylesheet" />
-  </head>
 
-  <body style="width: 100%; height: 100%; margin: 0; padding: 0">
-    <div id="curTime" style="z-index: 1000; color: orange; position: absolute">
-      curTime
-    </div>
+<head>
+    <link href="sunrise.css" rel="stylesheet">
+</head>
+
+<body style="width: 100%; height: 100%; margin: 0; padding: 0" onresize="windowResize();">
+    <div id="curTime" style="
+    z-index: 1000;
+    color: orange;
+    position: absolute;">curTime</div>
 
     <div id="sun"></div>
     <div id="sunDay"></div>
@@ -21,7 +23,7 @@
     <div id="water"></div>
 
     <div id="waterReflectionContainer">
-      <div id="waterReflectionMiddle"></div>
+        <div id="waterReflectionMiddle"></div>
     </div>
 
     <div id="waterDistance"></div>
@@ -30,7 +32,19 @@
     <div id="oceanRipple"></div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://rawgit.com/mourner/suncalc/master/suncalc.js"></script>
 
-    <script src="dist/sunrise.bundle.js"></script>
-  </body>
+    <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
+    <script>
+        debugger;
+        var exports;
+
+        var sr = new Sunrise(document, 0.75);
+
+        function windowResize() {
+            sr.updateDimensions();
+        }
+    </script>
+</body>
+
 </html>

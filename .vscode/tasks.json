@@ -1,42 +1,29 @@
 {
-    "version": "2.0.0",
+    "version": "0.1.0",
     "command": "gulp",
-    "tasks": [
-        {
-            "label": "default",
-            "type": "gulp",
-            "task": "default",
-            "isBackground": true,
-            "problemMatcher": [],
-            "group": {
-                "_id": "build",
-                "isDefault": false
-            }
+    "isShellCommand": true,
+    "tasks": [{
+            "taskName": "default",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isBackground": true
         },
         {
-            "label": "sass",
-            "type": "gulp",
-            "task": "sass",
-            "isBackground": true,
-            "problemMatcher": [],
-            "group": {
-                "_id": "build",
-                "isDefault": false
-            }
+            "taskName": "sass",
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "isBackground": true
         },
         {
-            "label": "TypeScript Transpilation",
-            "type": "shell",
+            // See https://go.microsoft.com/fwlink/?LinkId=733558
+            // for the documentation about the tasks.json format
+            "taskName": "TypeScript Transpilation",
             "command": "tsc",
-            "args": [
-                "-p",
-                "."
-            ],
-            "problemMatcher": "$tsc",
-            "group": {
-                "_id": "build",
-                "isDefault": false
-            }
+            "isShellCommand": true,
+            "args": ["-p", "."],
+            "showOutput": "silent",
+            "isBuildCommand": true,
+            "problemMatcher": "$tsc"
         }
     ]
 }
