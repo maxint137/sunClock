@@ -1,7 +1,8 @@
 const path = require("path");
 
 module.exports = {
-  mode: "development", // or 'production'
+  mode: 'production',
+  // mode: "development",
   entry: "./out/sunclock.js",
 
   entry: {
