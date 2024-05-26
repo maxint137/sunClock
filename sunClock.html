@@ -53,7 +53,7 @@
         screen.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
       };
 
-      screen.addEventListener("click", () => {
+      const handleTapOrClick = () => {
         opacity += direction;
         if (opacity <= 0 || 0.89 <= opacity) {
           direction = -direction;
@@ -63,7 +63,10 @@
         // Reset the timeout
         clearTimeout(resetTimeout);
         resetTimeout = setTimeout(resetOpacity, reset_timeout);
-      });
+      };
+
+      screen.addEventListener("click", handleTapOrClick);
+      screen.addEventListener("touchstart", handleTapOrClick);
     </script>
     
     <input type="checkbox" id="lightswitch" />
