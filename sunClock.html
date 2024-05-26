@@ -1,4 +1,4 @@
-s<html>
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -21,10 +21,51 @@ s<html>
         input#lightswitch:checked~.main .square .inner_face {
             background-color: transparent;
         }
+
+      .semi-transparent-screen {
+        position: fixed; /* Ensures it covers the whole viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0); /* Black with 50% opacity */
+        z-index: 9999; /* Make sure it appears on top of other elements */
+      }
+        
     </style>
 </head>
 
 <body>
+
+    <div class="semi-transparent-screen"></div>
+
+    <script>
+      const screen = document.querySelector(".semi-transparent-screen");
+      let opacity = 0; // Initial opacity
+      let direction = 0.1;
+
+      // 1 hour in milliseconds
+      const reset_timeout = 60 * 60 * 1000;
+      let resetTimeout = 0;
+
+      const resetOpacity = () => {
+        opacity = 0;
+        screen.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+      };
+
+      screen.addEventListener("click", () => {
+        opacity += direction;
+        if (opacity <= 0 || 0.89 <= opacity) {
+          direction = -direction;
+        }
+        screen.style.backgroundColor = `rgba(0, 0, 0, ${opacity.toFixed(1)})`;
+
+        // Reset the timeout
+        clearTimeout(resetTimeout);
+        resetTimeout = setTimeout(resetOpacity, reset_timeout);
+      });
+    </script>
+    
     <input type="checkbox" id="lightswitch" />
     <img style='display:none' src='https://raw.githubusercontent.com/maxint137/sunClock/master/sunClock.jpg' />
     <div class="main">
