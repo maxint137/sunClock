@@ -1,7 +1,13 @@
 /// <reference path="suncalc.d.ts" />
+const CSS_PREFIXES = [
+  "-webkit-radial-gradient",
+  "-moz-radial-gradient",
+  "-ms-radial-gradient",
+];
 
 export class Sunrise {
   mouse: any = { x: 0, y: 0 };
+
   myWidth: number;
   myHeight: number;
 
@@ -128,39 +134,76 @@ export class Sunrise {
   }
 
   moveSun(e: any) {
+    const build_path = (data: [string, number][]) =>
+      "circle, " +
+      data.map(([color, stop]) => `${color} ${stop}%`).join(",") +
+      ")";
+
     this.mouse.x = e.clientX || e.pageX;
     this.mouse.y = e.clientY || e.pageY;
     this.updateDimensions();
 
-        let sun = document.getElementById("sun");
-        if (sun) {
-            let sunPath = 'circle, rgba(242,248,247,1) 0%,rgba(249,249,28,1) 3%,rgba(247,214,46,1) 8%, rgba(248,200,95,1) 12%,rgba(201,165,132,1) 30%,rgba(115,130,133,1) 51%,rgba(46,97,122,1) 85%,rgba(24,75,106,1) 100%)';
-            sun.style.background = '-webkit-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunPath;
-            sun.style.background = '-moz-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunPath;
-            sun.style.background = '-ms-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunPath;
-        }
+    let sun = document.getElementById("sun");
+    if (sun) {
+      const sun_path_data: [string, number][] = [
+        ["rgba(242,248,247,1)", 0], // light_blue
+        ["rgba(249,249,28,1)", 3], // yellow
+        ["rgba(247,214,46,1)", 8], // orange
+        ["rgba(248,200,95,1)", 12], // light_orange
+        ["rgba(201,165,132,1)", 30], // light_brown
+        ["rgba(115,130,133,1)", 51], // grey
+        ["rgba(46,97,122,1)", 85], // dark_grey
+        ["rgba(24,75,106,1)", 100], // darker_grey
+      ];
 
-        let sunDay = document.getElementById("sunDay");
-        if (sunDay) {
-            let sunDayPath = 'circle, rgba(252,255,251,0.9) 0%,rgba(253,250,219,0.4) 30%,rgba(226,219,197,0.01) 70%, rgba(226,219,197,0.0) 70%,rgba(201,165,132,0) 100%)';
-            sunDay.style.background = '-webkit-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunDayPath;
-            sunDay.style.background = '-moz-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunDayPath;
-            sunDay.style.background = '-ms-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunDayPath;
-        }
+      CSS_PREFIXES.forEach((prefix) => {
+        sun.style.background = `${prefix}(${this.mouse.x}px ${
+          this.mouse.y
+        }px, ${build_path(sun_path_data)}`;
+      });
+    }
 
-        let sunSet = document.getElementById("sunSet");
-        if (sunSet) {
-            let sunSetPath = 'circle, rgba(254,255,255,0.8) 5%,rgba(236,255,0,1) 10%,rgba(253,50,41,1) 25%, rgba(243,0,0,1) 40%,rgba(93,0,0,1) 100%)';
-            sunSet.style.background = '-webkit-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunSetPath;
-            sunSet.style.background = '-moz-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunSetPath;
-            sunSet.style.background = '-ms-radial-gradient(' + this.mouse.x + 'px ' + this.mouse.y + 'px, ' + sunSetPath;
-        }
+    let sunDay = document.getElementById("sunDay");
+    if (sunDay) {
+      const sun_date_path_data: [string, number][] = [
+        ["rgba(252,255,251,1)", 0], // light_blue
+        ["rgba(253,250,219,0.4)", 30], // yellow
+        ["rgba(226,219,197,0.01)", 70], //  very_light_brown
+        ["rgba(226,219,197,0)", 70], // very_light_brown_transparent
+        ["rgba(201,165,132,0)", 100], // light_brown_transparent
+      ];
 
+      CSS_PREFIXES.forEach((prefix) => {
+        sunDay.style.background = `${prefix}(${this.mouse.x}px ${
+          this.mouse.y
+        }px, ${build_path(sun_date_path_data)}`;
+      });
+    }
 
-        let waterReflectionContainer = document.getElementById("waterReflectionContainer");
-        if (waterReflectionContainer) {
-            waterReflectionContainer.style.perspectiveOrigin = (this.mouse.x / this.myWidth * 100).toString() + "% -15%";
-        }
+    let sunSet = document.getElementById("sunSet");
+    if (sunSet) {
+      const sun_set_path_data: [string, number][] = [
+        ["rgba(254,255,255,0.8)", 5], // white
+        ["rgba(236,255,0,1)", 10], // yellow
+        ["rgba(253,50,41,1)", 25], // red
+        ["rgba(243,0,0,1)", 40], // dark_red
+        ["rgba(93,0,0,1)", 100], // darker_red
+      ];
+
+      CSS_PREFIXES.forEach((prefix) => {
+        sunSet.style.background = `${prefix}(${this.mouse.x}px ${
+          this.mouse.y
+        }px, ${build_path(sun_set_path_data)}`;
+      });
+    }
+
+    let waterReflectionContainer = document.getElementById(
+      "waterReflectionContainer"
+    );
+    if (waterReflectionContainer) {
+      waterReflectionContainer.style.perspectiveOrigin =
+        ((this.mouse.x / this.myWidth) * 100).toString() + "% -15%";
+    }
 
     let waterReflectionMiddle = document.getElementById(
       "waterReflectionMiddle"
