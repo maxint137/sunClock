@@ -13,7 +13,7 @@ s<html>
         .inner_face {
             background: transparent;
         }
-        
+
         .outer_face .marker,
         input#lightswitch:checked~.main .square .outer_face::before,
         input#lightswitch:checked~.main .square .outer_face::after,
@@ -43,9 +43,9 @@ s<html>
                         <div class="hand minute"></div>
                         <div class="hand second"></div>
                 </a>
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div id="sun"></div>
@@ -69,7 +69,6 @@ s<html>
     <div id="darknessOverlay"></div>
     <div id="oceanRipple"></div>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
 
@@ -83,7 +82,7 @@ s<html>
             sr.updateDimensions();
         }
 
-        var latlng = {
+        var lat_lng = {
             lat: 35.7075239,
             lng: 139.729803
         }
@@ -91,23 +90,22 @@ s<html>
         var $hands = $('#liveclock div.hand')
 
         var fps = 1000;
-        if(getUrlParameter('noSeconds')) {
-            fps = 1000/60;
+        if (getUrlParameter('noSeconds')) {
+            fps = 1000 / 60;
         }
-        
-        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function(f) {
+
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (f) {
             setTimeout(f, fps)
         }
 
 
         function updateClock(timestamp, firstCall) {
 
-            var curdate = new Date();
+            var curDate = new Date();
 
-
-            var hour_as_degree = (curdate.getHours() + curdate.getMinutes() / 60) / 12 * 360
-            var minute_as_degree = (curdate.getMinutes() + curdate.getSeconds() / 60) / 60 * 360
-            var second_as_degree = (curdate.getSeconds() + curdate.getMilliseconds() / 1000) / 60 * 360
+            var hour_as_degree = (curDate.getHours() + curDate.getMinutes() / 60) / 12 * 360
+            var minute_as_degree = (curDate.getMinutes() + curDate.getSeconds() / 60) / 60 * 360
+            var second_as_degree = (curDate.getSeconds() + curDate.getMilliseconds() / 1000) / 60 * 360
 
             $hands.filter('.hour').css({
                 transform: 'rotate(' + hour_as_degree + 'deg)'
@@ -119,17 +117,18 @@ s<html>
                 transform: 'rotate(' + second_as_degree + 'deg)'
             })
 
-            if (firstCall || 0 == curdate.getSeconds() % 5) {
-                var times = SunCalc.getTimes(new Date(), latlng.lat, latlng.lng);
+            if (firstCall || 0 == curDate.getSeconds() % 5) {
+
+                var times = SunCalc.getTimes(new Date(), lat_lng.lat, lat_lng.lng);
                 var lightsOn = times.sunrise < new Date() && new Date() < times.sunset;
                 $("#lightswitch").prop("checked", !lightsOn);
 
-                // update the barckground too:
-                sr.setCurrentTime(curdate);
+                // update the background too:
+                sr.setCurrentTime(curDate);
             }
 
             // refresh the sunrise data once a night
-            if (0 == curdate.getHours() && 7 == curdate.getMinutes() && 5 == curdate.getSeconds()) {
+            if (0 == curDate.getHours() && 7 == curDate.getMinutes() && 5 == curDate.getSeconds()) {
                 sr = new Sunrise(document, 0.75);
                 console.log(sr.times);
             }
@@ -137,17 +136,17 @@ s<html>
 
         updateClock(true);
         // calling raf from updateClock looks spooky - the call stack is endless, so:
-        setInterval(function(){requestAnimationFrame(updateClock)}, fps);
+        setInterval(function () { requestAnimationFrame(updateClock) }, fps);
 
         function initMap() {
             navigator.geolocation.getCurrentPosition(
-                function(location) {
-                    latlng.lat = location.coords.latitude;
-                    latlng.lng = location.coords.longitude;
-                    console.log(latlng);
+                function (location) {
+                    lat_lng.lat = location.coords.latitude;
+                    lat_lng.lng = location.coords.longitude;
+                    console.log(lat_lng);
 
-                    geodecode(latlng);
-                }, function(ah) {
+                    geoDecode(lat_lng);
+                }, function (ah) {
                     console.log("getCurrentPosition failed, code=" + ah.code);
                     alert("Can't get the current location. So we can't calculate the sun position");
                     document.getElementById("location").setAttribute("data-after", ".");
@@ -155,17 +154,17 @@ s<html>
             );
         }
 
-        function geodecode(latlng) {
-            var geocoder = new google.maps.Geocoder;
+        function geoDecode(lat_lng) {
+            var geoCoder = new google.maps.Geocoder;
 
             var locationNames = [];
-            geocoder.geocode({
-                'location': latlng
-            }, function(results, status) {
+            geoCoder.geocode({
+                'location': lat_lng
+            }, function (results, status) {
                 if (status === 'OK') {
-                    results.forEach(function(result) {
-                        // find sublocality or locality in types of address_components
-                        result.address_components.forEach(function(ac) {
+                    results.forEach(function (result) {
+                        // find sub-locality or locality in types of address_components
+                        result.address_components.forEach(function (ac) {
                             if (-1 < ac.types.indexOf('locality')) {
                                 locationNames.push(ac.short_name);
                             }
@@ -174,17 +173,17 @@ s<html>
                     }, this);
 
                 } else {
-                    window.alert('Geocoder failed due to: ' + status);
+                    window.alert('geoCoder failed due to: ' + status);
                 }
 
                 console.log(locationNames);
                 $('.inner_face').attr('data-after',
-                        locationNames[0]
-                            ?locationNames[0]
-                            :(Math.round(latlng.lat*100)/100)+ "°, " + Math.round(latlng.lng*100)/100 + "°");
+                    locationNames[0]
+                        ? locationNames[0]
+                        : (Math.round(lat_lng.lat * 100) / 100) + "°, " + Math.round(lat_lng.lng * 100) / 100 + "°");
             });
         }
-        
+
         function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
                 sURLVariables = sPageURL.split('&'),
@@ -197,19 +196,19 @@ s<html>
                 if (sParameterName[0] === sParam) {
                     return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
-        }
-    };
+            }
+        };
     </script>
-    
+
     <!-- TODO: that doesn't work anymore
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGXhTSdPtnyhV3GNq20bu9V_Qu1e5Fjc&callback=initMap">
     -->
-    
+
     </script>
     <script>
-        (function(i, s, o, g, r, a, m) {
+        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
+            i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date();
             a = s.createElement(o),
@@ -222,19 +221,6 @@ s<html>
         ga('create', 'UA-91481619-1', 'auto');
         ga('send', 'pageview');
     </script>
-
-    <!--<script type="text/javascript">
-        window._urq = window._urq || [];
-        _urq.push(['initSite', '854c9ebd-48ad-4bf5-a752-bae245953867']);
-        (function() {
-            var ur = document.createElement('script');
-            ur.type = 'text/javascript';
-            ur.async = true;
-            ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js');
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ur, s);
-        })();
-    </script>-->
 </body>
 
 </html>
