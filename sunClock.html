@@ -72,11 +72,10 @@ s<html>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
 
+    <script type="module">
+        import * as srm from "./sunrise.js";
 
-
-    <script type="text/javascript" language="JavaScript" src="sunrise.js"></script>
-    <script type="text/javascript">
-        var sr = new Sunrise(document, 0.75);
+        var sr = new srm.Sunrise(document, 0.75);
 
         function windowResize() {
             sr.updateDimensions();

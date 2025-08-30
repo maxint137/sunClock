@@ -1,16 +1,16 @@
- {
-     "compileOnSave": true,
-     "compilerOptions": {
-         "target": "es5",
-         "module": "commonjs",
-         "sourceMap": true,
-         "emitDecoratorMetadata": true,
-         "experimentalDecorators": true,
-         "removeComments": false,
-         "noImplicitAny": false,
-         "watch": true
-     },
-     "files": [
-         "./sunrise.ts"
-     ]
- }
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "watch": true
+    },
+    "files": [
+        "./sunrise.ts"
+    ]
+}
